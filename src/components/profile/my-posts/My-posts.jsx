@@ -11,6 +11,13 @@ export const MyPosts = () => {
     const handleChange = (event) => {
         setValue(event.target.value)
     }
+
+    const posts = [
+        { id: '1', message: 'Hello', likesCount: 10 },
+        { id: '2', message: 'World', likesCount: 5 },
+        { id: '3', message: 'Ololo', likesCount: 23 },
+    ]
+
     return (
         <div className={styles.my_posts}>
             <p className={styles.title}>My posts</p>
@@ -30,8 +37,9 @@ export const MyPosts = () => {
                     Add post
                 </Button>
             </div>
-            <Post message="Hello" likesCount={5} />
-            <Post message="World" likesCount={15} />
+            {posts.map((post) => (
+                <Post key={post.id} {...post} />
+            ))}
         </div>
     )
 }

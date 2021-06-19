@@ -1,0 +1,9 @@
+@import '../../../styles/typo.scss';
+
+.info {
+    padding: 24px;
+    background-color: #ff6b6b;
+}
+.title {
+    @include title;
+}
