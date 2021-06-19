@@ -1,0 +1,10 @@
+@import '../../styles/typo.scss';
+
+.dialogs {
+    padding: 24px;
+    background-color: #00d2d3;
+}
+
+.title {
+    @include title;
+}

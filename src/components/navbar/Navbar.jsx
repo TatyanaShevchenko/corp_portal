@@ -1,12 +1,13 @@
+import MenuItem from '@material-ui/core/MenuItem'
+import MenuList from '@material-ui/core/MenuList'
+
+import styles from './index.module.scss'
+
 export const Navbar = () => {
     return (
-        <nav className="navbar">
-            {/* eslint-disable-next-line */}
-            <a href="#">1</a>
-            {/* eslint-disable-next-line */}
-            <a href="#">2</a>
-            {/* eslint-disable-next-line */}
-            <a href="#">3</a>
-        </nav>
+        <MenuList className={styles.navbar}>
+            <MenuItem>Profile</MenuItem>
+            <MenuItem>Dialogs</MenuItem>
+        </MenuList>
     )
 }

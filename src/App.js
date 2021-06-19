@@ -1,16 +1,20 @@
 import { Header } from './components/header'
 import { Navbar } from './components/navbar'
 import { Profile } from './components/profile'
+import { Dialogs } from './components/dialogs'
 
 import 'reset-css'
-import './App.css'
+import styles from './App.module.scss'
 
 function App() {
     return (
-        <div className="app__wrapper">
+        <div className={styles.app}>
             <Header />
             <Navbar />
-            <Profile />
+            <div className={styles.content}>
+                <Profile />
+                <Dialogs />
+            </div>
         </div>
     )
 }
