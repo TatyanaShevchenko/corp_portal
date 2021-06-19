@@ -1,3 +1,26 @@
-.App {
-    text-align: center;
+.app__wrapper {
+    width: 1000px;
+    height: 100%;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 1fr 4fr;
+    grid-template-areas:
+        'header header'
+        'navbar profile';
+}
+
+.header {
+    grid-area: header;
+    background-color: rgb(255, 232, 209);
+}
+.navbar {
+    grid-area: navbar;
+    background-color: rgb(218, 185, 250);
+}
+.profile {
+    grid-area: profile;
+    background-color: pink;
 }

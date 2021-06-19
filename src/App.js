@@ -1,15 +1,16 @@
-import Button from '@material-ui/core/Button'
+import { Header } from './components/header'
+import { Navbar } from './components/navbar'
+import { Profile } from './components/profile'
 
 import 'reset-css'
 import './App.css'
 
 function App() {
     return (
-        <div className="App">
-            App
-            <Button variant="contained" color="primary">
-                Hello World
-            </Button>
+        <div className="app__wrapper">
+            <Header />
+            <Navbar />
+            <Profile />
         </div>
     )
 }
