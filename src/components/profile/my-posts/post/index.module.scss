@@ -1,0 +1,21 @@
+.post {
+    padding: 12px;
+    border: 1px solid #8395a7;
+    border-radius: 12px;
+    background-color: #deecfc;
+
+    & + & {
+        margin-top: 12px;
+    }
+}
+
+.post__text {
+    margin-bottom: 12px;
+}
+
+.post__likes {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+}

@@ -1,0 +1,12 @@
+@import '../../styles/typo.scss';
+
+.navbar {
+    grid-area: navbar;
+    color: #fff;
+    background-color: #2e86de;
+}
+
+.navbar__link {
+    color: #fff;
+    text-decoration: none;
+}

@@ -1,0 +1,27 @@
+@import '../../styles/typo.scss';
+
+.dialogs {
+    padding: 24px;
+    background-color: #00d2d3;
+    height: 100%;
+    color: #222f3e;
+}
+
+.title {
+    @include title;
+}
+
+.grid {
+    display: grid;
+    padding: 12px 0;
+    grid-template-columns: 2fr 5fr;
+}
+.persons {
+    display: flex;
+    flex-direction: column;
+}
+
+.person {
+    padding: 8px 0;
+    text-decoration: none;
+}

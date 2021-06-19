@@ -1,0 +1,11 @@
+@import '../../styles/typo.scss';
+
+.profile {
+    padding: 24px;
+    height: 100%;
+    background-color: #ff9ff3;
+}
+
+.title {
+    @include title;
+}

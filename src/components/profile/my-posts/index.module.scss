@@ -1,0 +1,15 @@
+@import '../../../styles/typo.scss';
+
+.my_posts {
+    padding: 24px;
+    background-color: #feca57;
+}
+
+.title {
+    @include title;
+    margin-bottom: 32px;
+}
+
+.form {
+    margin-bottom: 12px;
+}
