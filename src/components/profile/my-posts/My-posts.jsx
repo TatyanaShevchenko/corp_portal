@@ -5,18 +5,12 @@ import Button from '@material-ui/core/Button'
 import { Post } from './post'
 import styles from './index.module.scss'
 
-export const MyPosts = () => {
+export const MyPosts = ({ posts }) => {
     const [value, setValue] = useState('Start typing')
 
     const handleChange = (event) => {
         setValue(event.target.value)
     }
-
-    const posts = [
-        { id: '1', message: 'Hello', likesCount: 10 },
-        { id: '2', message: 'World', likesCount: 5 },
-        { id: '3', message: 'Ololo', likesCount: 23 },
-    ]
 
     return (
         <div className={styles.my_posts}>
@@ -37,9 +31,8 @@ export const MyPosts = () => {
                     Add post
                 </Button>
             </div>
-            {posts.map((post) => (
-                <Post key={post.id} {...post} />
-            ))}
+            {!!posts.length &&
+                posts.map((post) => <Post key={post.id} {...post} />)}
         </div>
     )
 }
