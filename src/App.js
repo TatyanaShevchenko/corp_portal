@@ -8,21 +8,21 @@ import { Dialogs } from './components/dialogs'
 import 'reset-css'
 import styles from './App.module.scss'
 
-function App({ state, addPost }) {
+function App({ store }) {
     return (
         <Router>
             <div className={styles.app}>
                 <Header />
-                <Navbar data={state.navbar} />
+                <Navbar data={store._state.navbar} />
                 <div className={styles.content}>
                     <Switch>
                         <Route exact path="/dialogs">
-                            <Dialogs data={state.dialogsPage} />
+                            <Dialogs data={store._state.dialogsPage} />
                         </Route>
                         <Route exact path="/">
                             <Profile
-                                data={state.profilePage}
-                                addPost={addPost}
+                                data={store._state.profilePage}
+                                addPost={store.addPost.bind(store)}
                             />
                         </Route>
                     </Switch>

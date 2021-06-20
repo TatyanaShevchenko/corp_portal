@@ -14,7 +14,7 @@ export const MyPosts = ({ posts, addPost }) => {
 
     const handleAddPost = () => {
         addPost(value)
-        // setValue('')
+        setValue('')
     }
 
     return (
