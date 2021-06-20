@@ -1,3 +1,5 @@
+const ADD_POST = 'ADD_POST'
+
 export const store = {
     _state: {
         profilePage: {
@@ -45,28 +47,34 @@ export const store = {
             ],
         },
     },
+    _callSubscriber() {
+        console.log('Rerender')
+    },
 
     getState() {
         return this._state
     },
 
-    setState(data) {},
-
-    _callSubscriber() {
-        console.log('Rerender')
-    },
-
-    addPost(message) {
-        const newPost = {
-            id: this._state.profilePage.posts.length + 1,
-            message,
-            likesCount: 0,
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._callSubscriber()
-    },
-
     subscribe(observer) {
         this._callSubscriber = observer
     },
+
+    dispatch(action) {
+        switch (action.type) {
+            case 'ADD_POST':
+                // eslint-disable-next-line
+                const newPost = {
+                    id: this._state.profilePage.posts.length + 1,
+                    message: action.payload.message,
+                    likesCount: 0,
+                }
+                this._state.profilePage.posts.push(newPost)
+                this._callSubscriber()
+                break
+        }
+    },
+}
+
+export const addPostAC = (payload) => {
+    return { type: ADD_POST, payload }
 }

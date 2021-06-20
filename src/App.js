@@ -22,7 +22,7 @@ function App({ store }) {
                         <Route exact path="/">
                             <Profile
                                 data={store._state.profilePage}
-                                addPost={store.addPost.bind(store)}
+                                dispatch={store.dispatch.bind(store)}
                             />
                         </Route>
                     </Switch>

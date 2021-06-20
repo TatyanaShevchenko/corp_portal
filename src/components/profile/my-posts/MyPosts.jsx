@@ -4,8 +4,9 @@ import Button from '@material-ui/core/Button'
 
 import { Post } from './post'
 import styles from './index.module.scss'
+import { addPostAC } from '../../../redux/state'
 
-export const MyPosts = ({ posts, addPost }) => {
+export const MyPosts = ({ posts, dispatch }) => {
     const [value, setValue] = useState('')
 
     const handleChange = (event) => {
@@ -13,7 +14,7 @@ export const MyPosts = ({ posts, addPost }) => {
     }
 
     const handleAddPost = () => {
-        addPost(value)
+        dispatch(addPostAC({ message: value }))
         setValue('')
     }
 
