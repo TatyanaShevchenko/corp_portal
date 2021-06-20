@@ -8,7 +8,7 @@ import { Dialogs } from './components/dialogs'
 import 'reset-css'
 import styles from './App.module.scss'
 
-function App({ posts, dialogs, messages }) {
+function App({ state }) {
     return (
         <Router>
             <div className={styles.app}>
@@ -17,10 +17,13 @@ function App({ posts, dialogs, messages }) {
                 <div className={styles.content}>
                     <Switch>
                         <Route exact path="/dialogs">
-                            <Dialogs dialogs={dialogs} messages={messages} />
+                            <Dialogs
+                                dialogs={state.dialogs}
+                                messages={state.messages}
+                            />
                         </Route>
                         <Route exact path="/">
-                            <Profile posts={posts} />
+                            <Profile posts={state.posts} />
                         </Route>
                     </Switch>
                 </div>
