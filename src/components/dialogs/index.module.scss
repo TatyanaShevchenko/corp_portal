@@ -1,7 +1,8 @@
 @import '../../styles/typo.scss';
 
-.dialogs {
+.dialogs__wrapper {
     padding: 24px;
+    box-sizing: border-box;
     background-color: #00d2d3;
     height: 100%;
     color: #222f3e;
@@ -16,12 +17,7 @@
     padding: 12px 0;
     grid-template-columns: 2fr 5fr;
 }
-.persons {
+.dialogs {
     display: flex;
     flex-direction: column;
-}
-
-.person {
-    padding: 8px 0;
-    text-decoration: none;
 }

@@ -1,0 +1,14 @@
+@import '../../../../styles/typo.scss';
+
+.friend {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.friend__image {
+    width: 40px;
+    height: 40px;
+}
