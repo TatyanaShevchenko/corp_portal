@@ -2,7 +2,8 @@ import { Dialog } from './dialog'
 import { Message } from './message'
 import styles from './index.module.scss'
 
-export const Dialogs = ({ dialogs, messages }) => {
+export const Dialogs = ({ data }) => {
+    const { dialogs, messages } = data
     return (
         <div className={styles.dialogs__wrapper}>
             <p className={styles.title}>Dialogs</p>

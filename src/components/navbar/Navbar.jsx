@@ -5,8 +5,10 @@ import MenuItem from '@material-ui/core/MenuItem'
 import MenuList from '@material-ui/core/MenuList'
 
 import styles from './index.module.scss'
+import { Friends } from './friends'
 
-export const Navbar = () => {
+export const Navbar = ({ data }) => {
+    const { friends } = data
     const [anchorEl, setAnchorEl] = useState(null)
     const [selectedIndex, setSelectedIndex] = useState(0)
 
@@ -21,22 +23,25 @@ export const Navbar = () => {
     ]
 
     return (
-        <MenuList className={styles.navbar}>
-            {options.map((option, index) => (
-                <MenuItem
-                    key={option.name}
-                    selected={index === selectedIndex}
-                    onClick={(event) => handleMenuItemClick(event, index)}
-                >
-                    <NavLink
-                        exact={option.exact}
-                        to={option.link}
-                        className={styles.navbar__link}
+        <div className={styles.navbar}>
+            <MenuList>
+                {options.map((option, index) => (
+                    <MenuItem
+                        key={option.name}
+                        selected={index === selectedIndex}
+                        onClick={(event) => handleMenuItemClick(event, index)}
                     >
-                        {option.name}
-                    </NavLink>
-                </MenuItem>
-            ))}
-        </MenuList>
+                        <NavLink
+                            exact={option.exact}
+                            to={option.link}
+                            className={styles.navbar__link}
+                        >
+                            {option.name}
+                        </NavLink>
+                    </MenuItem>
+                ))}
+            </MenuList>
+            <Friends friends={friends} />
+        </div>
     )
 }

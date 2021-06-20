@@ -5,11 +5,16 @@ import Button from '@material-ui/core/Button'
 import { Post } from './post'
 import styles from './index.module.scss'
 
-export const MyPosts = ({ posts }) => {
-    const [value, setValue] = useState('Start typing')
+export const MyPosts = ({ posts, addPost }) => {
+    const [value, setValue] = useState('')
 
     const handleChange = (event) => {
         setValue(event.target.value)
+    }
+
+    const handleAddPost = () => {
+        addPost(value)
+        // setValue('')
     }
 
     return (
@@ -27,7 +32,11 @@ export const MyPosts = ({ posts }) => {
                     variant="outlined"
                     margin="normal"
                 />
-                <Button variant="contained" color="primary">
+                <Button
+                    onClick={handleAddPost}
+                    variant="contained"
+                    color="primary"
+                >
                     Add post
                 </Button>
             </div>
