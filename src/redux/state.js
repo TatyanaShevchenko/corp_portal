@@ -1,5 +1,9 @@
-const ADD_POST = 'ADD_POST'
-const ADD_MESSAGE = 'ADD_MESSAGE'
+import {
+    profileReducer,
+    dialogsReducer,
+    ADD_POST,
+    ADD_MESSAGE,
+} from './reducers'
 
 export const store = {
     _state: {
@@ -61,28 +65,16 @@ export const store = {
     },
 
     dispatch(action) {
-        switch (action.type) {
-            case 'ADD_POST':
-                // eslint-disable-next-line
-                const newPost = {
-                    id: this._state.profilePage.posts.length + 1,
-                    message: action.payload.message,
-                    likesCount: 0,
-                }
-                this._state.profilePage.posts.push(newPost)
-                this._callSubscriber()
-                break
+        this._state.profilePage = profileReducer(
+            this._state.profilePage,
+            action
+        )
+        this._state.dialogsPage = dialogsReducer(
+            this._state.dialogsPage,
+            action
+        )
 
-            case 'ADD_MESSAGE':
-                // eslint-disable-next-line
-                const newMessage = {
-                    id: this._state.dialogsPage.messages.length + 1,
-                    msg: action.payload.message,
-                }
-                this._state.dialogsPage.messages.push(newMessage)
-                this._callSubscriber()
-                break
-        }
+        this._callSubscriber()
     },
 }
 
