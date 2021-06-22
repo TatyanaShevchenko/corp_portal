@@ -1,5 +1,9 @@
 export const ADD_POST = 'ADD_POST'
 
+export const addPostAC = (payload) => {
+    return { type: ADD_POST, payload }
+}
+
 export const profileReducer = (state, action) => {
     switch (action.type) {
         case ADD_POST:

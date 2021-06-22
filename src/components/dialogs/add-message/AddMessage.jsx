@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button'
 import { useState } from 'react'
 
 import styles from './index.module.scss'
-import { addMsgAC } from '../../../redux/state'
+import { addMsgAC } from '../../../redux/reducers'
 
 export const AddMessage = ({ dispatch }) => {
     const [value, setValue] = useState('')

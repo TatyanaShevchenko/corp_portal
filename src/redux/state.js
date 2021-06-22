@@ -1,9 +1,4 @@
-import {
-    profileReducer,
-    dialogsReducer,
-    ADD_POST,
-    ADD_MESSAGE,
-} from './reducers'
+import { profileReducer, dialogsReducer } from './reducers'
 
 export const store = {
     _state: {
@@ -76,12 +71,4 @@ export const store = {
 
         this._callSubscriber()
     },
-}
-
-export const addPostAC = (payload) => {
-    return { type: ADD_POST, payload }
-}
-
-export const addMsgAC = (payload) => {
-    return { type: ADD_MESSAGE, payload }
 }

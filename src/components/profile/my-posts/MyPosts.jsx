@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button'
 
 import { Post } from './post'
 import styles from './index.module.scss'
-import { addPostAC } from '../../../redux/state'
+import { addPostAC } from '../../../redux/reducers'
 
 export const MyPosts = ({ posts, dispatch }) => {
     const [value, setValue] = useState('')
