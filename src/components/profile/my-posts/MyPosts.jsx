@@ -36,7 +36,7 @@ export const MyPosts = ({ posts, dispatch }) => {
                 <Button
                     onClick={handleAddPost}
                     variant="contained"
-                    color="primary"
+                    color="secondary"
                 >
                     Add post
                 </Button>

@@ -17,7 +17,10 @@ function App({ store }) {
                 <div className={styles.content}>
                     <Switch>
                         <Route exact path="/dialogs">
-                            <Dialogs data={store._state.dialogsPage} />
+                            <Dialogs
+                                data={store._state.dialogsPage}
+                                dispatch={store.dispatch.bind(store)}
+                            />
                         </Route>
                         <Route exact path="/">
                             <Profile

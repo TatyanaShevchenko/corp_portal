@@ -1,4 +1,5 @@
 const ADD_POST = 'ADD_POST'
+const ADD_MESSAGE = 'ADD_MESSAGE'
 
 export const store = {
     _state: {
@@ -71,10 +72,24 @@ export const store = {
                 this._state.profilePage.posts.push(newPost)
                 this._callSubscriber()
                 break
+
+            case 'ADD_MESSAGE':
+                // eslint-disable-next-line
+                const newMessage = {
+                    id: this._state.dialogsPage.messages.length + 1,
+                    msg: action.payload.message,
+                }
+                this._state.dialogsPage.messages.push(newMessage)
+                this._callSubscriber()
+                break
         }
     },
 }
 
 export const addPostAC = (payload) => {
     return { type: ADD_POST, payload }
+}
+
+export const addMsgAC = (payload) => {
+    return { type: ADD_MESSAGE, payload }
 }
