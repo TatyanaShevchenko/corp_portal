@@ -10,8 +10,8 @@ export const profileReducer = (state, action) => {
                 likesCount: 0,
             }
             state.posts.push(newPost)
-            break
+            return state
+        default:
+            return state
     }
-
-    return state
 }

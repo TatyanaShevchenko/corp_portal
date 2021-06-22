@@ -9,7 +9,8 @@ export const dialogsReducer = (state, action) => {
                 msg: action.payload.message,
             }
             state.messages.push(newMessage)
-            break
+            return state
+        default:
+            return state
     }
-    return state
 }
