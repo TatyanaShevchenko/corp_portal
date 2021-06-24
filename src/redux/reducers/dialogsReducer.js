@@ -4,7 +4,21 @@ export const addMsgAC = (payload) => {
     return { type: ADD_MESSAGE, payload }
 }
 
-export const dialogsReducer = (state, action) => {
+let initialState = {
+    dialogs: [
+        { id: 1, name: 'Alex' },
+        { id: 2, name: 'Viktor' },
+        { id: 3, name: 'Tatyana' },
+    ],
+
+    messages: [
+        { id: 1, msg: 'Hi' },
+        { id: 2, msg: 'Bla bla bla' },
+        { id: 3, msg: 'Hellloooo' },
+    ],
+}
+
+export const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
             // eslint-disable-next-line
@@ -13,6 +27,7 @@ export const dialogsReducer = (state, action) => {
                 msg: action.payload.message,
             }
             state.messages.push(newMessage)
+            console.log('state', state)
             return state
         default:
             return state

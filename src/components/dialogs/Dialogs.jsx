@@ -5,6 +5,7 @@ import styles from './index.module.scss'
 
 export const Dialogs = ({ data, dispatch }) => {
     const { dialogs, messages } = data
+    console.log('messages', messages)
     return (
         <div className={styles.dialogs__wrapper}>
             <p className={styles.title}>Dialogs</p>

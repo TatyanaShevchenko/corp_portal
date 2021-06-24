@@ -9,22 +9,23 @@ import 'reset-css'
 import styles from './App.module.scss'
 
 function App({ store }) {
+    const state = store.getState()
     return (
         <Router>
             <div className={styles.app}>
                 <Header />
-                <Navbar data={store._state.navbar} />
+                <Navbar data={state.navbar} />
                 <div className={styles.content}>
                     <Switch>
                         <Route exact path="/dialogs">
                             <Dialogs
-                                data={store._state.dialogsPage}
+                                data={state.dialogsPage}
                                 dispatch={store.dispatch.bind(store)}
                             />
                         </Route>
                         <Route exact path="/">
                             <Profile
-                                data={store._state.profilePage}
+                                data={state.profilePage}
                                 dispatch={store.dispatch.bind(store)}
                             />
                         </Route>

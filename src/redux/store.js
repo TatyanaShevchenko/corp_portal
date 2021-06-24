@@ -1,4 +1,4 @@
-import { profileReducer, dialogsReducer } from './reducers'
+import { profileReducer, dialogsReducer, navbarReducer } from './reducers'
 
 export const store = {
     _state: {
