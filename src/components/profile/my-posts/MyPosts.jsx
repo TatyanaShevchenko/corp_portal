@@ -1,12 +1,12 @@
 import { useState } from 'react'
+
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
 import { Post } from './post'
 import styles from './index.module.scss'
-import { addPostAC } from '../../../redux/reducers'
 
-export const MyPosts = ({ posts, dispatch }) => {
+export const MyPosts = ({ posts, addPost }) => {
     const [value, setValue] = useState('')
 
     const handleChange = (event) => {
@@ -14,7 +14,7 @@ export const MyPosts = ({ posts, dispatch }) => {
     }
 
     const handleAddPost = () => {
-        dispatch(addPostAC({ message: value }))
+        addPost({ message: value })
         setValue('')
     }
 

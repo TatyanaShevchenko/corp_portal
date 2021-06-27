@@ -1,15 +1,14 @@
 import { Info } from './info'
-import { MyPosts } from './my-posts'
+import { MyPostsContainer } from './my-posts'
 
 import styles from './index.module.scss'
 
-export const Profile = ({ data, dispatch }) => {
-    const { posts } = data
+export const Profile = ({ store }) => {
     return (
         <div className={styles.profile}>
             <p className={styles.title}>Profile</p>
             <Info />
-            <MyPosts posts={posts} dispatch={dispatch} />
+            <MyPostsContainer store={store} />
         </div>
     )
 }

@@ -27,7 +27,7 @@ export const dialogsReducer = (state = initialState, action) => {
                 msg: action.payload.message,
             }
             state.messages.push(newMessage)
-            console.log('state', state)
+
             return state
         default:
             return state

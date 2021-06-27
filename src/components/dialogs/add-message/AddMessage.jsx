@@ -4,9 +4,8 @@ import Button from '@material-ui/core/Button'
 import { useState } from 'react'
 
 import styles from './index.module.scss'
-import { addMsgAC } from '../../../redux/reducers'
 
-export const AddMessage = ({ dispatch }) => {
+export const AddMessage = ({ addMessage }) => {
     const [value, setValue] = useState('')
 
     const handleChange = (event) => {
@@ -14,7 +13,7 @@ export const AddMessage = ({ dispatch }) => {
     }
 
     const handleAddPost = () => {
-        dispatch(addMsgAC({ message: value }))
+        addMessage({ message: value })
         setValue('')
     }
 

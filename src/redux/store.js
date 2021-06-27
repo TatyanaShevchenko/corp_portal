@@ -47,9 +47,7 @@ export const store = {
             ],
         },
     },
-    _callSubscriber() {
-        console.log('Rerender')
-    },
+    _callSubscriber() {},
 
     getState() {
         return this._state
