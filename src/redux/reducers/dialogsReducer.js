@@ -26,9 +26,8 @@ export const dialogsReducer = (state = initialState, action) => {
                 id: state.messages.length + 1,
                 msg: action.payload.message,
             }
-            state.messages.push(newMessage)
 
-            return state
+            return { ...state, messages: [...state.messages, newMessage] }
         default:
             return state
     }
