@@ -1,17 +1,23 @@
-import { useContext } from 'react'
+import { connect } from 'react-redux'
 
-import StoreContext from '../../../StoreContext'
 import { MyPosts } from './index'
 import { addPostAC } from '../../../redux/reducers'
 
-export const MyPostsContainer = () => {
-    const store = useContext(StoreContext)
-    const posts = store.getState().profilePage.posts
-
-    const addPost = (text) => {
-        let action = addPostAC(text)
-        store.dispatch(action)
+const mapStateToProps = (state) => {
+    return {
+        posts: state.profilePage.posts,
     }
-
-    return <MyPosts posts={posts} addPost={addPost} />
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addPost: (text) => {
+            let action = addPostAC(text)
+            dispatch(action)
+        },
+    }
+}
+
+export const MyPostsContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(MyPosts)

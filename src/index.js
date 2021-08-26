@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
 
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 
 import App from './App'
-import StoreContext from './StoreContext'
 import store from './redux/redux-store'
 import reportWebVitals from './reportWebVitals'
 import './index.css'
@@ -23,9 +23,9 @@ Sentry.init({
 const rerenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <StoreContext.Provider value={store}>
-                <App store={store} />
-            </StoreContext.Provider>
+            <Provider store={store}>
+                <App />
+            </Provider>
         </React.StrictMode>,
         document.getElementById('root')
     )

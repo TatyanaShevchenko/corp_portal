@@ -1,16 +1,20 @@
-import { useContext } from 'react'
+import { connect } from 'react-redux'
 
 import { Dialogs } from './index'
-import StoreContext from '../../StoreContext'
 import { addMsgAC } from '../../redux/reducers'
 
-export const DialogsContainer = () => {
-    const store = useContext(StoreContext)
-    const data = store.getState().dialogsPage
-
-    const addMessage = (msg) => {
-        store.dispatch(addMsgAC(msg))
+const mapStateToProps = (state) => {
+    return {
+        data: state.dialogsPage,
     }
-
-    return <Dialogs data={data} addMessage={addMessage} />
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addMessage: (msg) => dispatch(addMsgAC(msg)),
+    }
+}
+
+export const DialogsContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Dialogs)
