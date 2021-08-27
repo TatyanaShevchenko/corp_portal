@@ -1,0 +1,46 @@
+@import '../../styles/typo.scss';
+
+.users {
+    padding: 24px;
+    box-sizing: border-box;
+    height: 100%;
+    background-color: #ff9ff3;
+}
+
+.title {
+    @include title;
+    margin-bottom: 40px;
+}
+
+.single__user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    background-color: #ffb0f4;
+    border: 2px solid #ff79ed;
+    border-radius: 12px;
+
+    &__photo {
+        width: 100px;
+        height: 100px;
+        margin-right: 36px;
+    }
+
+    &__info {
+        flex-grow: 1;
+    }
+
+    &__name {
+        @include bold-title;
+        margin-bottom: 12px;
+    }
+
+    &__status {
+        margin-bottom: 12px;
+    }
+
+    & + & {
+        margin-top: 12px;
+    }
+}

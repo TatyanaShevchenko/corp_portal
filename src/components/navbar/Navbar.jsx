@@ -20,6 +20,7 @@ export const Navbar = ({ data }) => {
     const options = [
         { name: 'profile', link: '/', exact: false },
         { name: 'dialogs', link: '/dialogs', exact: true },
+        { name: 'users', link: '/users', exact: true },
     ]
 
     return (

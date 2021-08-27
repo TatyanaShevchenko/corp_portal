@@ -2,3 +2,8 @@
     font-size: 18px;
     font-weight: 500;
 }
+
+@mixin bold-title {
+    font-size: 16px;
+    font-weight: 700;
+}
