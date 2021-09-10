@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios'
+
 import Button from '@material-ui/core/Button'
 
 import { setUsersAC, switchFollowAC } from '../../redux/reducers/usersReducer'
@@ -7,35 +9,19 @@ import { setUsersAC, switchFollowAC } from '../../redux/reducers/usersReducer'
 import styles from './index.module.scss'
 
 const Users = ({ users, switchFollower, setUsers }) => {
-    const initialUsers = [
-        {
-            id: 1,
-            followed: true,
-            photo: 'https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png',
-            name: 'Olga',
-            status: 'Some text',
-            location: { city: 'Moscow', country: 'Russia' },
-        },
-        {
-            id: 2,
-            followed: false,
-            photo: 'https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png',
-            name: 'Alex',
-            status: 'Some text',
-            location: { city: 'Linz', country: 'Austria' },
-        },
-        {
-            id: 3,
-            followed: true,
-            photo: 'https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png',
-            name: 'Tatiana',
-            status: 'Some text',
-            location: { city: 'Wels', country: 'Austria' },
-        },
-    ]
+    const BASE_URL = 'https://social-network.samuraijs.com/api/1.0'
+
+    async function getInitialUsers() {
+        try {
+            const usersFromAPI = await axios.get(`${BASE_URL}/users`)
+            setUsers(usersFromAPI.data.items)
+        } catch (error) {
+            console.warn(error)
+        }
+    }
 
     useEffect(() => {
-        setUsers(initialUsers)
+        getInitialUsers()
     }, [])
 
     const onButtonClick = (id) => {
@@ -46,16 +32,16 @@ const Users = ({ users, switchFollower, setUsers }) => {
         return (
             <div className={styles.single__user} key={index}>
                 <img
-                    src={user.photo}
+                    src={
+                        user.photos.small ||
+                        'https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png'
+                    }
                     alt={`${user.name}`}
                     className={styles.single__user__photo}
                 />
                 <div className={styles.single__user__info}>
                     <p className={styles.single__user__name}>{user.name}</p>
                     <p className={styles.single__user__status}>{user.status}</p>
-                    <p className={styles.single__user__location}>
-                        {user.location.city},{user.location.country}
-                    </p>
                 </div>
                 <Button
                     onClick={() => {
