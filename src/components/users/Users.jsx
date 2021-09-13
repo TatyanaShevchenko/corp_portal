@@ -1,31 +1,39 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import axios from 'axios'
 
 import Button from '@material-ui/core/Button'
+import { Pagination } from '@material-ui/lab'
+
+import { getInitialUsers, getPagesCount } from '../../api/api'
 
 import { setUsersAC, switchFollowAC } from '../../redux/reducers/usersReducer'
 
 import styles from './index.module.scss'
 
 const Users = ({ users, switchFollower, setUsers }) => {
-    const BASE_URL = 'https://social-network.samuraijs.com/api/1.0'
-
-    async function getInitialUsers() {
-        try {
-            const usersFromAPI = await axios.get(`${BASE_URL}/users`)
-            setUsers(usersFromAPI.data.items)
-        } catch (error) {
-            console.warn(error)
-        }
-    }
+    const [pages, setPages] = useState(0)
 
     useEffect(() => {
-        getInitialUsers()
+        const initialUsers = getInitialUsers(1)
+        initialUsers.then((users) => {
+            setUsers(users)
+        })
+        const pagesCount = getPagesCount()
+        pagesCount.then((pages) => {
+            setPages(pages)
+        })
     }, [])
 
     const onButtonClick = (id) => {
         switchFollower(id)
+    }
+
+    const onPageChange = (event, page) => {
+        setUsers([])
+        const initialUsers = getInitialUsers(page)
+        initialUsers.then((users) => {
+            setUsers(users)
+        })
     }
 
     const allUsers = users.map((user, index) => {
@@ -58,7 +66,13 @@ const Users = ({ users, switchFollower, setUsers }) => {
     return (
         <div className={styles.users}>
             <p className={styles.title}>All users</p>
-            {allUsers}
+            <div className={styles.all__users}>{allUsers}</div>
+            <Pagination
+                onChange={onPageChange}
+                count={pages}
+                color="primary"
+                size="large"
+            />
         </div>
     )
 }
