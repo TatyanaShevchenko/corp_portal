@@ -4,7 +4,9 @@ import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import { Pagination } from '@material-ui/lab'
 
-import { getInitialUsers, getPagesCount } from '../../api/api'
+import { getInitialUsers, getPagesCount } from '../../api'
+
+import { Loader } from '../loader'
 
 import { setUsersAC, switchFollowAC } from '../../redux/reducers/usersReducer'
 
@@ -12,11 +14,14 @@ import styles from './index.module.scss'
 
 const Users = ({ users, switchFollower, setUsers }) => {
     const [pages, setPages] = useState(0)
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
+        setIsLoading(true)
         const initialUsers = getInitialUsers(1)
         initialUsers.then((users) => {
             setUsers(users)
+            setIsLoading(false)
         })
         const pagesCount = getPagesCount()
         pagesCount.then((pages) => {
@@ -29,10 +34,11 @@ const Users = ({ users, switchFollower, setUsers }) => {
     }
 
     const onPageChange = (event, page) => {
-        setUsers([])
+        setIsLoading(true)
         const initialUsers = getInitialUsers(page)
         initialUsers.then((users) => {
             setUsers(users)
+            setIsLoading(false)
         })
     }
 
@@ -65,14 +71,19 @@ const Users = ({ users, switchFollower, setUsers }) => {
     })
     return (
         <div className={styles.users}>
-            <p className={styles.title}>All users</p>
-            <div className={styles.all__users}>{allUsers}</div>
-            <Pagination
-                onChange={onPageChange}
-                count={pages}
-                color="primary"
-                size="large"
-            />
+            {isLoading && <Loader />}
+            {!isLoading && (
+                <>
+                    <p className={styles.title}>All users</p>
+                    <div className={styles.all__users}>{allUsers}</div>
+                    <Pagination
+                        onChange={onPageChange}
+                        count={pages}
+                        color="primary"
+                        size="large"
+                    />
+                </>
+            )}
         </div>
     )
 }
