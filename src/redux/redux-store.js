@@ -5,6 +5,7 @@ import {
     dialogsReducer,
     navbarReducer,
     usersReducer,
+    loadingReducer,
 } from './reducers'
 
 let rootReducer = combineReducers({
@@ -12,6 +13,7 @@ let rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
     navbar: navbarReducer,
+    loading: loadingReducer,
 })
 
 let store = createStore(rootReducer)

@@ -2,44 +2,35 @@ import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
-import { Pagination } from '@material-ui/lab'
 
-import { getInitialUsers, getPagesCount } from '../../api'
+import { getUsers } from '../../api'
 
 import { Loader } from '../loader'
+import { PaginationContainer } from '../pagination/Pagination.jsx'
 
 import { setUsersAC, switchFollowAC } from '../../redux/reducers/usersReducer'
+import { switchLoadingAC } from '../../redux/reducers/loadingReducer'
 
 import styles from './index.module.scss'
 
-const Users = ({ users, switchFollower, setUsers }) => {
-    const [pages, setPages] = useState(0)
-    const [isLoading, setIsLoading] = useState(false)
-
+const Users = ({
+    users,
+    switchFollower,
+    setUsers,
+    isLoading,
+    setIsLoading,
+}) => {
     useEffect(() => {
         setIsLoading(true)
-        const initialUsers = getInitialUsers(1)
+        const initialUsers = getUsers(1)
         initialUsers.then((users) => {
             setUsers(users)
             setIsLoading(false)
-        })
-        const pagesCount = getPagesCount()
-        pagesCount.then((pages) => {
-            setPages(pages)
         })
     }, [])
 
     const onButtonClick = (id) => {
         switchFollower(id)
-    }
-
-    const onPageChange = (event, page) => {
-        setIsLoading(true)
-        const initialUsers = getInitialUsers(page)
-        initialUsers.then((users) => {
-            setUsers(users)
-            setIsLoading(false)
-        })
     }
 
     const allUsers = users.map((user, index) => {
@@ -76,12 +67,7 @@ const Users = ({ users, switchFollower, setUsers }) => {
                 <>
                     <p className={styles.title}>All users</p>
                     <div className={styles.all__users}>{allUsers}</div>
-                    <Pagination
-                        onChange={onPageChange}
-                        count={pages}
-                        color="primary"
-                        size="large"
-                    />
+                    <PaginationContainer />
                 </>
             )}
         </div>
@@ -91,6 +77,7 @@ const Users = ({ users, switchFollower, setUsers }) => {
 const mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,
+        isLoading: state.loading.isLoading,
     }
 }
 
@@ -98,6 +85,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setUsers: (users) => dispatch(setUsersAC(users)),
         switchFollower: (id) => dispatch(switchFollowAC(id)),
+        setIsLoading: (isLoading) => dispatch(switchLoadingAC(isLoading)),
     }
 }
 

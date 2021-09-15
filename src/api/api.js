@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const BASE_URL = 'https://social-network.samuraijs.com/api/1.0'
 
-export async function getInitialUsers(page) {
+export async function getUsers(page) {
     try {
         const usersFromAPI = await axios.get(`${BASE_URL}/users?page=${page}`)
         return usersFromAPI.data.items
