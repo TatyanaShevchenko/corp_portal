@@ -1,8 +1,15 @@
+import { switchLoadingAC, SWITCH_LOADING } from './loadingReducer'
+import { getUsers, getPagesCount } from '../../api'
+
 export const SWITCH_FOLLOW = 'SWITCH_FOLLOW'
 export const SET_USERS = 'SET_USERS'
+export const SET_PAGES = 'SET_PAGES'
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 
 let initialState = {
     users: [],
+    pages: 0,
+    currentPage: 1,
 }
 
 export const switchFollowAC = (payload) => {
@@ -13,10 +20,46 @@ export const setUsersAC = (payload) => {
     return { type: SET_USERS, payload }
 }
 
+export const setPagesAC = (payload) => {
+    return { type: SET_PAGES, payload }
+}
+
+export const setCurrentPageAC = (payload) => {
+    return { type: SET_CURRENT_PAGE, payload }
+}
+
+export const getUsersThunk = (page) => async (dispatch) => {
+    dispatch(switchLoadingAC(true))
+    try {
+        const usersFromAPI = getUsers(page)
+        usersFromAPI.then((users) => {
+            dispatch(setUsersAC(users))
+            dispatch(switchLoadingAC(false))
+        })
+    } catch (error) {
+        console.warn(error)
+    }
+}
+
+export const getPagesCountThunk = () => async (dispatch) => {
+    try {
+        const pagesCount = getPagesCount()
+        pagesCount.then((count) => {
+            dispatch(setPagesAC(count))
+        })
+    } catch (error) {
+        console.warn(error)
+    }
+}
+
 export const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USERS:
             return { ...state, users: [...action.payload] }
+        case SET_PAGES:
+            return { ...state, pages: action.payload }
+        case SET_CURRENT_PAGE:
+            return { ...state, currentPage: action.payload }
         case SWITCH_FOLLOW:
             return {
                 ...state,

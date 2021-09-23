@@ -1,32 +1,25 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
 
-import { getUsers } from '../../api'
-
 import { Loader } from '../loader'
 import { PaginationContainer } from '../pagination/Pagination.jsx'
 
-import { setUsersAC, switchFollowAC } from '../../redux/reducers/usersReducer'
-import { switchLoadingAC } from '../../redux/reducers/loadingReducer'
+import {
+    setUsersAC,
+    switchFollowAC,
+    getUsersThunk,
+} from '../../redux/reducers/usersReducer'
 
 import styles from './index.module.scss'
 
-const Users = ({
-    users,
-    switchFollower,
-    setUsers,
-    isLoading,
-    setIsLoading,
-}) => {
+const Users = ({ users, switchFollower, isLoading, getUsers }) => {
+    const getPageUsers = (page) => {
+        return getUsers(page)
+    }
     useEffect(() => {
-        setIsLoading(true)
-        const initialUsers = getUsers(1)
-        initialUsers.then((users) => {
-            setUsers(users)
-            setIsLoading(false)
-        })
+        getPageUsers(1)
     }, [])
 
     const onButtonClick = (id) => {
@@ -60,12 +53,13 @@ const Users = ({
             </div>
         )
     })
+    console.log('isLoading', isLoading)
     return (
         <div className={styles.users}>
+            <PaginationContainer />
             {isLoading && <Loader />}
             {!isLoading && (
                 <>
-                    <PaginationContainer />
                     <p className={styles.title}>All users</p>
                     <div className={styles.all__users}>{allUsers}</div>
                 </>
@@ -83,9 +77,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        getUsers: (page) => dispatch(getUsersThunk(page)),
         setUsers: (users) => dispatch(setUsersAC(users)),
         switchFollower: (id) => dispatch(switchFollowAC(id)),
-        setIsLoading: (isLoading) => dispatch(switchLoadingAC(isLoading)),
     }
 }
 

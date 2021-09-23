@@ -1,29 +1,34 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { Pagination } from '@material-ui/lab'
 
-import { getUsers, getPagesCount } from '../../api'
+import { Loader } from '../loader'
 
-import { setUsersAC } from '../../redux/reducers/usersReducer'
+import {
+    getUsersThunk,
+    getPagesCountThunk,
+    setCurrentPageAC,
+} from '../../redux/reducers/usersReducer'
 
-export const PaginationComponent = ({ setUsers }) => {
-    const [pages, setPages] = useState(0)
-    const [currentPage, setCurrentPage] = useState(1)
-
+export const PaginationComponent = ({
+    pages,
+    currentPage,
+    getUsers,
+    setPages,
+    setCurrentPage,
+}) => {
     useEffect(() => {
-        const pagesCount = getPagesCount()
-        pagesCount.then((pages) => {
-            setPages(pages)
-        })
+        setPages()
     }, [])
+
+    const getPageUsers = (page) => {
+        return getUsers(page)
+    }
 
     const onPageChange = (event, page) => {
         setCurrentPage(page)
-        const newPageUsers = getUsers(page)
-        newPageUsers.then((users) => {
-            setUsers(users)
-        })
+        getPageUsers(page)
     }
 
     return (
@@ -36,14 +41,21 @@ export const PaginationComponent = ({ setUsers }) => {
         />
     )
 }
-
+const mapStateToProps = (state) => {
+    return {
+        pages: state.usersPage.pages,
+        currentPage: state.usersPage.currentPage,
+    }
+}
 const mapDispatchToProps = (dispatch) => {
     return {
-        setUsers: (users) => dispatch(setUsersAC(users)),
+        getUsers: (page) => dispatch(getUsersThunk(page)),
+        setPages: () => dispatch(getPagesCountThunk()),
+        setCurrentPage: (page) => dispatch(setCurrentPageAC(page)),
     }
 }
 
 export const PaginationContainer = connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(PaginationComponent)
