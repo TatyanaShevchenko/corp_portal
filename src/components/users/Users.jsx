@@ -65,9 +65,9 @@ const Users = ({
             {isLoading && <Loader />}
             {!isLoading && (
                 <>
+                    <PaginationContainer />
                     <p className={styles.title}>All users</p>
                     <div className={styles.all__users}>{allUsers}</div>
-                    <PaginationContainer />
                 </>
             )}
         </div>
