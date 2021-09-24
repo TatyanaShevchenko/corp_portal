@@ -15,37 +15,3 @@
 .all__users {
     margin-bottom: 24px;
 }
-
-.single__user {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px;
-    background-color: #ffb0f4;
-    border: 2px solid #ff79ed;
-    border-radius: 12px;
-
-    &__photo {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        margin-right: 36px;
-    }
-
-    &__info {
-        flex-grow: 1;
-    }
-
-    &__name {
-        @include bold-title;
-        margin-bottom: 12px;
-    }
-
-    &__status {
-        margin-bottom: 12px;
-    }
-
-    & + & {
-        margin-top: 12px;
-    }
-}

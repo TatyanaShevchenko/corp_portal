@@ -22,13 +22,9 @@ export const PaginationComponent = ({
         setPages()
     }, [])
 
-    const getPageUsers = (page) => {
-        return getUsers(page)
-    }
-
     const onPageChange = (event, page) => {
         setCurrentPage(page)
-        getPageUsers(page)
+        getUsers(page)
     }
 
     return (
