@@ -8,7 +8,7 @@ import { PaginationContainer } from '../pagination/Pagination.jsx'
 import {
     setUsersAC,
     switchFollowAC,
-    getUsersThunk,
+    getAllUsers,
 } from '../../redux/reducers/usersReducer'
 
 import styles from './index.module.scss'
@@ -47,15 +47,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getUsers: (page) => dispatch(getUsersThunk(page)),
-        setUsers: (users) => dispatch(setUsersAC(users)),
-        switchFollower: (id) => dispatch(switchFollowAC(id)),
-    }
-}
-
-export const UsersContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Users)
+export const UsersContainer = connect(mapStateToProps, {
+    getUsers: getAllUsers,
+    setUsers: setUsersAC,
+    switchFollower: switchFollowAC,
+})(Users)

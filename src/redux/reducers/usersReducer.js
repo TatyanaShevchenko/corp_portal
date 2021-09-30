@@ -24,11 +24,11 @@ export const setPagesAC = (payload) => {
     return { type: SET_PAGES, payload }
 }
 
-export const setCurrentPageAC = (payload) => {
+export const setCurrentPage = (payload) => {
     return { type: SET_CURRENT_PAGE, payload }
 }
 
-export const getUsersThunk = (page) => async (dispatch) => {
+export const getAllUsers = (page) => async (dispatch) => {
     dispatch(switchLoadingAC(true))
     try {
         const usersFromAPI = getUsers(page)
@@ -41,7 +41,7 @@ export const getUsersThunk = (page) => async (dispatch) => {
     }
 }
 
-export const getPagesCountThunk = () => async (dispatch) => {
+export const setPages = () => async (dispatch) => {
     try {
         const pagesCount = getPagesCount()
         pagesCount.then((count) => {
