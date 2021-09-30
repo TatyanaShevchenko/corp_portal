@@ -8,13 +8,7 @@ const mapStateToProps = (state) => {
         data: state.dialogsPage,
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addMessage: (msg) => dispatch(addMsgAC(msg)),
-    }
-}
 
-export const DialogsContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Dialogs)
+export const DialogsContainer = connect(mapStateToProps, {
+    addMessage: addMsgAC,
+})(Dialogs)
