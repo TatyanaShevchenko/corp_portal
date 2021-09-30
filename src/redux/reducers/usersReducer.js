@@ -1,4 +1,4 @@
-import { switchLoadingAC, SWITCH_LOADING } from './loadingReducer'
+import { switchLoadingAC } from './loadingReducer'
 import { getUsers, getPagesCount } from '../../api'
 
 export const SWITCH_FOLLOW = 'SWITCH_FOLLOW'

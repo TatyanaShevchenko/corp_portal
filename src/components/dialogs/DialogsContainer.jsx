@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import { Dialogs } from './index'
-import { addMsgAC } from '../../redux/reducers'
+import { addMessage } from '../../redux/reducers'
 
 const mapStateToProps = (state) => {
     return {
@@ -10,5 +10,5 @@ const mapStateToProps = (state) => {
 }
 
 export const DialogsContainer = connect(mapStateToProps, {
-    addMessage: addMsgAC,
+    addMessage,
 })(Dialogs)
