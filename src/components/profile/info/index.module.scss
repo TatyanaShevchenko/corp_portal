@@ -3,8 +3,27 @@
 .info {
     padding: 24px;
     background-color: #ff6b6b;
+    display: flex;
+    gap: 48px;
 }
 .title {
     @include title;
+    margin-bottom: 12px;
+}
+
+.status,
+.job_status {
+    @include bold-title;
     margin-bottom: 24px;
+}
+
+.contacts__list__item {
+    margin-bottom: 6px;
+}
+
+.photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #fc4c4c;
 }

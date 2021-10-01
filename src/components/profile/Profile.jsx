@@ -3,12 +3,13 @@ import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import { getProfile } from '../../redux/reducers/profileReducer'
+import { Loader } from '../loader'
 import { Info } from './info'
 import { MyPostsContainer } from './my-posts'
 
 import styles from './index.module.scss'
 
-const Profile = ({ name, status, getProfile }) => {
+const Profile = ({ profile, getProfile, isLoading }) => {
     const { userId } = useParams()
 
     useEffect(() => {
@@ -16,20 +17,26 @@ const Profile = ({ name, status, getProfile }) => {
     }, [])
 
     return (
-        <div className={styles.profile}>
-            <p className={styles.title}>Profile</p>
-            <Info name={name} status={status} />
-            <MyPostsContainer />
-        </div>
+        <>
+            {isLoading && <Loader />}
+            {!isLoading && (
+                <div className={styles.profile}>
+                    <p className={styles.title}>Profile</p>
+                    <Info profile={profile} />
+                    <MyPostsContainer />
+                </div>
+            )}
+        </>
     )
 }
 
 const mapStateToProps = (state) => {
     return {
-        name: state.profilePage.name,
-        status: state.profilePage.status,
+        profile: state.profilePage.profile,
+        isLoading: state.loading.isLoading,
     }
 }
+
 export const ProfileContainer = connect(mapStateToProps, {
     getProfile,
 })(Profile)

@@ -22,7 +22,6 @@ export async function getPagesCount() {
 }
 
 export async function getUserProfile(userId) {
-    console.log('getUserProfile API', userId)
     try {
         const profileFromAPI = await axios.get(`${BASE_URL}/profile/${userId}`)
         return profileFromAPI.data

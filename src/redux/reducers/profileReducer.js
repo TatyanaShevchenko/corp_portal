@@ -5,8 +5,7 @@ export const ADD_POST = 'ADD_POST'
 export const SET_PROFILE = 'SET_PROFILE'
 
 let initialState = {
-    name: 'Tanya',
-    status: 'Wanna be in Austria',
+    profile: null,
     posts: [
         { id: 1, message: 'Hello', likesCount: 10 },
         { id: 2, message: 'World', likesCount: 5 },
@@ -23,12 +22,11 @@ export const setProfile = (payload) => {
 }
 
 export const getProfile = (userId) => async (dispatch) => {
-    // dispatch(switchLoadingAC(true))
+    dispatch(switchLoadingAC(true))
     try {
         const profile = await getUserProfile(userId)
-        console.log('profile', profile)
         dispatch(setProfile(profile))
-        // dispatch(switchLoadingAC(false))
+        dispatch(switchLoadingAC(false))
     } catch (error) {
         console.warn(error)
     }
@@ -46,7 +44,7 @@ export const profileReducer = (state = initialState, action) => {
 
             return { ...state, posts: [...state.posts, newPost] }
         case SET_PROFILE:
-            return { ...state, name: action.payload.fullName }
+            return { ...state, profile: { ...action.payload } }
         default:
             return state
     }

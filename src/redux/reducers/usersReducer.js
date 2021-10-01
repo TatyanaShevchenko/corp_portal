@@ -31,11 +31,9 @@ export const setCurrentPage = (payload) => {
 export const getAllUsers = (page) => async (dispatch) => {
     dispatch(switchLoadingAC(true))
     try {
-        const usersFromAPI = getUsers(page)
-        usersFromAPI.then((users) => {
-            dispatch(setUsersAC(users))
-            dispatch(switchLoadingAC(false))
-        })
+        const usersFromAPI = await getUsers(page)
+        dispatch(setUsersAC(usersFromAPI))
+        dispatch(switchLoadingAC(false))
     } catch (error) {
         console.warn(error)
     }
@@ -43,10 +41,8 @@ export const getAllUsers = (page) => async (dispatch) => {
 
 export const setPages = () => async (dispatch) => {
     try {
-        const pagesCount = getPagesCount()
-        pagesCount.then((count) => {
-            dispatch(setPagesAC(count))
-        })
+        const pagesCount = await getPagesCount()
+        dispatch(setPagesAC(pagesCount))
     } catch (error) {
         console.warn(error)
     }
