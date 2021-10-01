@@ -42,7 +42,7 @@ export const MyPosts = ({ posts, addPost }) => {
                 </Button>
             </div>
             {!!posts.length &&
-                posts.map((post) => <Post key={post.id} {...post} />)}
+                posts.map((post) => <Post key={post.id} {...post} />).reverse()}
         </div>
     )
 }
