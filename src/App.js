@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import { Header } from './components/header'
 import { NavbarContainer } from './components/navbar'
-import { Profile } from './components/profile'
+import { ProfileContainer } from './components/profile'
 import { DialogsContainer } from './components/dialogs'
 import { UsersContainer } from './components/users/Users.jsx'
 
@@ -23,8 +23,8 @@ function App() {
                         <Route exact path="/users">
                             <UsersContainer />
                         </Route>
-                        <Route exact path="/">
-                            <Profile />
+                        <Route exact path="/profile/:userId">
+                            <ProfileContainer />
                         </Route>
                     </Switch>
                 </div>
