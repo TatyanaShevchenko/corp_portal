@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import { useParams } from 'react-router-dom'
 
 import { getProfile, addPost } from '../../redux/reducers'
@@ -9,11 +10,12 @@ import { MyPosts } from './my-posts'
 
 import styles from './index.module.scss'
 
-const Profile = ({ profile, getProfile, posts, addPost, isLoading }) => {
-    const { userId } = useParams()
+const Profile = ({ profile, getProfile, posts, addPost, isLoading, match }) => {
+    // const { userId } = useParams()
 
+    const { userId } = match.params
     useEffect(() => {
-        getProfile(userId)
+        getProfile(userId || 2)
     }, [])
 
     return (
@@ -38,7 +40,9 @@ const mapStateToProps = (state) => {
     }
 }
 
-export const ProfileContainer = connect(mapStateToProps, {
-    getProfile,
-    addPost,
-})(Profile)
+export const ProfileContainer = withRouter(
+    connect(mapStateToProps, {
+        getProfile,
+        addPost,
+    })(Profile)
+)

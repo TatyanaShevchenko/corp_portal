@@ -23,7 +23,7 @@ function App() {
                         <Route exact path="/users">
                             <UsersContainer />
                         </Route>
-                        <Route exact path="/profile/:userId">
+                        <Route exact path="/profile/:userId?">
                             <ProfileContainer />
                         </Route>
                     </Switch>
