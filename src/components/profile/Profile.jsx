@@ -17,7 +17,7 @@ const Profile = ({userData, profile, getProfile, posts, addPost, isLoading, matc
 
     useEffect(() => {
         getProfile(userId || userData.id)
-    }, [])
+    }, [userData.id, userId])
 
     return (
         <>
