@@ -16,7 +16,7 @@ import styles from './index.module.scss'
 
 const Users = ({ users, followUserId, unfollowUserId,  isLoading, getUsers }) => {
     useEffect(() => {
-        getUsers(1)
+        getUsers()
     }, [])
 
     const switchFollow= (isFollowed, id) =>{

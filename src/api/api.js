@@ -1,14 +1,15 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://social-network.samuraijs.com/api/1.0'
+const instance = axios.create({
+    baseURL: 'https://social-network.samuraijs.com/api/1.0',
+    headers: {  "API-KEY":"32722a3d-dcdc-46bf-8a11-c6aeddca672c"},
+    withCredentials: true,
+  });
 
-export async function getUsers(page) {
+export async function getUsers(page = 1) {
     try {
-        const usersFromAPI = await axios.get(`${BASE_URL}/users?page=${page}`,
-        {   
-            withCredentials: true,
-            headers: {  "API-KEY":"32722a3d-dcdc-46bf-8a11-c6aeddca672c",}
-            })
+        const usersFromAPI = await instance.get(`/users?page=${page}`,
+       )
         return usersFromAPI.data.items
     } catch (error) {
         console.warn(error)
@@ -17,7 +18,7 @@ export async function getUsers(page) {
 
 export async function getPagesCount() {
     try {
-        const usersFromAPI = await axios.get(`${BASE_URL}/users`)
+        const usersFromAPI = await instance.get(`/users`)
         return Math.ceil(usersFromAPI.data.totalCount / 10)
     } catch (error) {
         console.warn(error)
@@ -26,7 +27,7 @@ export async function getPagesCount() {
 
 export async function getUserProfile(userId) {
     try {
-        const profileFromAPI = await axios.get(`${BASE_URL}/profile/${userId}`)
+        const profileFromAPI = await instance.get(`/profile/${userId}`)
         return profileFromAPI.data
     } catch (error) {
         console.warn(error)
@@ -35,7 +36,7 @@ export async function getUserProfile(userId) {
 
 export async function getAuthorisedData() {
     try {
-        const authorisationData = await axios.get(`${BASE_URL}/auth/me`, {
+        const authorisationData = await instance.get(`/auth/me`, {
             withCredentials: true
         })
         return authorisationData.data
@@ -46,12 +47,7 @@ export async function getAuthorisedData() {
 
 export async function followUser(userId) {
     try {
-        const res = await axios.post(`${BASE_URL}/follow/${userId}`,
-        {},
-        {   
-        withCredentials: true,
-        headers: {  "API-KEY":"32722a3d-dcdc-46bf-8a11-c6aeddca672c",}
-        })
+        const res = await instance.post(`/follow/${userId}`)
         return res
     } catch (error) {
         console.warn(error)
@@ -60,11 +56,7 @@ export async function followUser(userId) {
 
 export async function unfollowUser(userId) {
     try {
-        const res = await axios.delete(`${BASE_URL}/follow/${userId}`, {
-              
-                withCredentials: true,
-                headers: {  "API-KEY":"32722a3d-dcdc-46bf-8a11-c6aeddca672c",}
-                })
+        const res = await instance.delete(`/follow/${userId}`)
         return res.data
     } catch (error) {
         console.warn(error)
