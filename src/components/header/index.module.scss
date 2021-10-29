@@ -1,6 +1,7 @@
 @import '../../styles/typo.scss';
 
 .header {
+    @include bold-title;
     grid-area: header;
     color: white;
     padding: 16px;
@@ -16,7 +17,7 @@
     background-color: #feca57;
 }
 
-.login a, p{
+.login a{
     @include bold-title;
     color: white;
     text-decoration: none;

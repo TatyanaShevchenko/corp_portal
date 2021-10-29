@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 
 export const Info = ({ profile }) => {
-    if (profile) {
+    if (profile && profile.contacts) {
         const {
             fullName,
             aboutMe,

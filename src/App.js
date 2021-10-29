@@ -18,7 +18,7 @@ function App({userData,userMessages,isLoading, getAuthorisedInfo }) {
     useEffect(() => {
         getAuthorisedInfo()
     }, [])
-    
+
     return (
         <Router>
             <div className={styles.app}>
@@ -32,7 +32,10 @@ function App({userData,userMessages,isLoading, getAuthorisedInfo }) {
                         <Route exact path="/users">
                             <UsersContainer />
                         </Route>
-                        <Route exact path="/profile/:userId?">
+                        <Route path="/profile/:userId?">
+                            <ProfileContainer />
+                        </Route>
+                        <Route exact path="/">
                             <ProfileContainer />
                         </Route>
                     </Switch>

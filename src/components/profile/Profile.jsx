@@ -10,12 +10,13 @@ import { MyPosts } from './my-posts'
 
 import styles from './index.module.scss'
 
-const Profile = ({ profile, getProfile, posts, addPost, isLoading, match }) => {
+const Profile = ({userData, profile, getProfile, posts, addPost, isLoading, match }) => {
     // const { userId } = useParams()
 
     const { userId } = match.params
+
     useEffect(() => {
-        getProfile(userId || 2)
+        getProfile(userId || userData.id)
     }, [])
 
     return (
@@ -34,6 +35,7 @@ const Profile = ({ profile, getProfile, posts, addPost, isLoading, match }) => {
 
 const mapStateToProps = (state) => {
     return {
+        userData: state.auth.data,
         profile: state.profilePage.profile,
         isLoading: state.loading.isLoading,
         posts: state.profilePage.posts,
