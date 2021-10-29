@@ -1,12 +1,28 @@
+@import '../../styles/typo.scss';
+
 .header {
     grid-area: header;
     color: white;
     padding: 16px;
     background-color: #341f97;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .logo {
     width: 32px;
     height: 32px;
     border-radius: 50%;
     background-color: #feca57;
+}
+
+.login a, p{
+    @include bold-title;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover{
+       color:#feca57;
+    }
 }

@@ -7,6 +7,7 @@ import {
     navbarReducer,
     usersReducer,
     loadingReducer,
+    authReducer
 } from './reducers'
 
 let rootReducer = combineReducers({
@@ -15,6 +16,7 @@ let rootReducer = combineReducers({
     usersPage: usersReducer,
     navbar: navbarReducer,
     loading: loadingReducer,
+    auth: authReducer
 })
 
 let store = createStore(rootReducer, applyMiddleware(thunk))

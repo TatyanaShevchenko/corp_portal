@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 
-import App from './App'
+import {AppContainer} from './App'
 import store from './redux/redux-store'
 import reportWebVitals from './reportWebVitals'
 import './index.css'
@@ -23,7 +23,7 @@ Sentry.init({
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App />
+            <AppContainer />
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')
