@@ -1,7 +1,9 @@
 import { switchLoadingAC } from './loadingReducer'
-import { getUsers, getPagesCount } from '../../api'
+import { getUsers, getPagesCount, followUser, unfollowUser} from '../../api'
 
-export const SWITCH_FOLLOW = 'SWITCH_FOLLOW'
+// export const SWITCH_FOLLOW = 'SWITCH_FOLLOW'
+export const FOLLOW_USER = 'FOLLOW_USER'
+export const UNFOLLOW_USER = 'UNFOLLOW_USER'
 export const SET_USERS = 'SET_USERS'
 export const SET_PAGES = 'SET_PAGES'
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
@@ -12,8 +14,12 @@ let initialState = {
     currentPage: 1,
 }
 
-export const switchFollowAC = (payload) => {
-    return { type: SWITCH_FOLLOW, payload }
+export const followUserAC =  (payload) => {
+    return { type: FOLLOW_USER, payload }
+}
+
+export const unfollowUserAC = (payload) => {
+    return { type: UNFOLLOW_USER, payload}
 }
 
 export const setUsersAC = (payload) => {
@@ -48,6 +54,29 @@ export const setPages = () => async (dispatch) => {
     }
 }
 
+export const followUserId =(id) => async(dispatch)=>{
+    dispatch(switchLoadingAC(true))
+    try {
+        const res = await followUser(id)
+        dispatch(followUserAC(id))
+        dispatch(switchLoadingAC(false))
+    } catch (error) {
+        console.warn(error)
+    }
+}
+
+export const unfollowUserId =(id) => async(dispatch)=>{
+    dispatch(switchLoadingAC(true))
+    try {
+        const res = await unfollowUser(id)
+        dispatch(unfollowUserAC(id))
+        dispatch(switchLoadingAC(false))
+    } catch (error) {
+        console.warn(error)
+    }
+}
+
+
 export const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USERS:
@@ -56,12 +85,22 @@ export const usersReducer = (state = initialState, action) => {
             return { ...state, pages: action.payload }
         case SET_CURRENT_PAGE:
             return { ...state, currentPage: action.payload }
-        case SWITCH_FOLLOW:
+        case FOLLOW_USER:
             return {
                 ...state,
                 users: state.users.map((user) => {
                     if (user.id === action.payload) {
-                        return { ...user, followed: !user.followed }
+                        return { ...user, followed: true}
+                        }
+                    return user
+                }),
+            }
+        case UNFOLLOW_USER:
+            return {
+                ...state,
+                users: state.users.map((user) => {
+                    if (user.id === action.payload) {
+                        return { ...user, followed: false}
                     }
                     return user
                 }),

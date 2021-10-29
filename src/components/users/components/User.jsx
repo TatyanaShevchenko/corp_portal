@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import styles from './index.module.scss'
 
 export const User = ({ user, onButtonClick }) => {
+
     return (
         <div className={styles.single__user}>
             <NavLink to={`/profile/${user.id}`}>
@@ -22,7 +23,7 @@ export const User = ({ user, onButtonClick }) => {
             </div>
             <Button
                 onClick={() => {
-                    onButtonClick(user.id)
+                    onButtonClick(user.followed, user.id)
                 }}
                 variant="contained"
                 color={user.followed ? 'primary' : 'secondary'}

@@ -4,7 +4,11 @@ const BASE_URL = 'https://social-network.samuraijs.com/api/1.0'
 
 export async function getUsers(page) {
     try {
-        const usersFromAPI = await axios.get(`${BASE_URL}/users?page=${page}`)
+        const usersFromAPI = await axios.get(`${BASE_URL}/users?page=${page}`,
+        {   
+            withCredentials: true,
+            headers: {  "API-KEY":"32722a3d-dcdc-46bf-8a11-c6aeddca672c",}
+            })
         return usersFromAPI.data.items
     } catch (error) {
         console.warn(error)
@@ -35,6 +39,33 @@ export async function getAuthorisedData() {
             withCredentials: true
         })
         return authorisationData.data
+    } catch (error) {
+        console.warn(error)
+    }
+}
+
+export async function followUser(userId) {
+    try {
+        const res = await axios.post(`${BASE_URL}/follow/${userId}`,
+        {},
+        {   
+        withCredentials: true,
+        headers: {  "API-KEY":"32722a3d-dcdc-46bf-8a11-c6aeddca672c",}
+        })
+        return res
+    } catch (error) {
+        console.warn(error)
+    }
+}
+
+export async function unfollowUser(userId) {
+    try {
+        const res = await axios.delete(`${BASE_URL}/follow/${userId}`, {
+              
+                withCredentials: true,
+                headers: {  "API-KEY":"32722a3d-dcdc-46bf-8a11-c6aeddca672c",}
+                })
+        return res.data
     } catch (error) {
         console.warn(error)
     }

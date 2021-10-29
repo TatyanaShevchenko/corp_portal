@@ -7,22 +7,31 @@ import { PaginationContainer } from '../pagination/Pagination.jsx'
 
 import {
     setUsersAC,
-    switchFollowAC,
+    followUserId,
+    unfollowUserId,
     getAllUsers,
 } from '../../redux/reducers/usersReducer'
 
 import styles from './index.module.scss'
 
-const Users = ({ users, switchFollower, isLoading, getUsers }) => {
+const Users = ({ users, followUserId, unfollowUserId,  isLoading, getUsers }) => {
     useEffect(() => {
         getUsers(1)
     }, [])
+
+    const switchFollow= (isFollowed, id) =>{
+        if (isFollowed) {
+            unfollowUserId(id)
+        } else {
+            followUserId(id)
+        }
+    }
 
     const allUsers = users.map((user, index) => (
         <User
             key={index}
             user={user}
-            onButtonClick={(id) => switchFollower(id)}
+            onButtonClick={switchFollow}
         />
     ))
 
@@ -50,5 +59,7 @@ const mapStateToProps = (state) => {
 export const UsersContainer = connect(mapStateToProps, {
     getUsers: getAllUsers,
     setUsers: setUsersAC,
-    switchFollower: switchFollowAC,
+    followUserId,
+    unfollowUserId,
+    
 })(Users)
