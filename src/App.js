@@ -1,29 +1,30 @@
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import { Header } from './components/header'
-import { Navbar } from './components/navbar'
-import { Profile } from './components/profile'
-import { Dialogs } from './components/dialogs'
+import { NavbarContainer } from './components/navbar'
+import { ProfileContainer } from './components/profile'
+import { DialogsContainer } from './components/dialogs'
+import { UsersContainer } from './components/users/Users.jsx'
 
 import 'reset-css'
 import styles from './App.module.scss'
 
-function App({ state, addPost }) {
+function App() {
     return (
         <Router>
             <div className={styles.app}>
                 <Header />
-                <Navbar data={state.navbar} />
+                <NavbarContainer />
                 <div className={styles.content}>
                     <Switch>
                         <Route exact path="/dialogs">
-                            <Dialogs data={state.dialogsPage} />
+                            <DialogsContainer />
                         </Route>
-                        <Route exact path="/">
-                            <Profile
-                                data={state.profilePage}
-                                addPost={addPost}
-                            />
+                        <Route exact path="/users">
+                            <UsersContainer />
+                        </Route>
+                        <Route exact path="/profile/:userId?">
+                            <ProfileContainer />
                         </Route>
                     </Switch>
                 </div>

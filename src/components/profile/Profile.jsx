@@ -1,15 +1,48 @@
+import { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import { useParams } from 'react-router-dom'
+
+import { getProfile, addPost } from '../../redux/reducers'
+import { Loader } from '../loader'
 import { Info } from './info'
 import { MyPosts } from './my-posts'
 
 import styles from './index.module.scss'
 
-export const Profile = ({ data, addPost }) => {
-    const { posts } = data
+const Profile = ({ profile, getProfile, posts, addPost, isLoading, match }) => {
+    // const { userId } = useParams()
+
+    const { userId } = match.params
+    useEffect(() => {
+        getProfile(userId || 2)
+    }, [])
+
     return (
-        <div className={styles.profile}>
-            <p className={styles.title}>Profile</p>
-            <Info />
-            <MyPosts posts={posts} addPost={addPost} />
-        </div>
+        <>
+            {isLoading && <Loader />}
+            {!isLoading && (
+                <div className={styles.profile}>
+                    <p className={styles.title}>Profile</p>
+                    <Info profile={profile} />
+                    <MyPosts posts={posts} addPost={addPost} />
+                </div>
+            )}
+        </>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        profile: state.profilePage.profile,
+        isLoading: state.loading.isLoading,
+        posts: state.profilePage.posts,
+    }
+}
+
+export const ProfileContainer = withRouter(
+    connect(mapStateToProps, {
+        getProfile,
+        addPost,
+    })(Profile)
+)

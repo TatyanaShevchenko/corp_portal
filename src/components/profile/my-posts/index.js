@@ -1,1 +1,1 @@
-export { MyPosts } from './My-posts.jsx'
+export { MyPosts } from './MyPosts.jsx'

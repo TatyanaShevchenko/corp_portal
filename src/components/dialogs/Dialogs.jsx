@@ -1,9 +1,11 @@
 import { Dialog } from './dialog'
 import { Message } from './message'
+import { AddMessage } from './add-message'
 import styles from './index.module.scss'
 
-export const Dialogs = ({ data }) => {
+export const Dialogs = ({ data, addMessage }) => {
     const { dialogs, messages } = data
+
     return (
         <div className={styles.dialogs__wrapper}>
             <p className={styles.title}>Dialogs</p>
@@ -21,6 +23,7 @@ export const Dialogs = ({ data }) => {
                         ))}
                 </div>
             </div>
+            <AddMessage addMessage={addMessage} />
         </div>
     )
 }

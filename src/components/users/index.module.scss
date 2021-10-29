@@ -1,0 +1,17 @@
+@import '../../styles/typo.scss';
+
+.users {
+    padding: 24px;
+    box-sizing: border-box;
+    height: 100%;
+    background-color: #ff9ff3;
+}
+
+.title {
+    @include title;
+    margin: 40px 0;
+}
+
+.all__users {
+    margin-bottom: 24px;
+}

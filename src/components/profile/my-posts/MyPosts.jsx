@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
@@ -13,8 +14,8 @@ export const MyPosts = ({ posts, addPost }) => {
     }
 
     const handleAddPost = () => {
-        addPost(value)
-        // setValue('')
+        addPost({ message: value })
+        setValue('')
     }
 
     return (
@@ -35,13 +36,13 @@ export const MyPosts = ({ posts, addPost }) => {
                 <Button
                     onClick={handleAddPost}
                     variant="contained"
-                    color="primary"
+                    color="secondary"
                 >
                     Add post
                 </Button>
             </div>
             {!!posts.length &&
-                posts.map((post) => <Post key={post.id} {...post} />)}
+                posts.map((post) => <Post key={post.id} {...post} />).reverse()}
         </div>
     )
 }
