@@ -10,21 +10,23 @@ import {
     followUserId,
     unfollowUserId,
     getAllUsers,
+    getAllFriends
 } from '../../redux/reducers/usersReducer'
 
 import styles from './index.module.scss'
 
-const Users = ({ users, followUserId, unfollowUserId,  isLoading, getUsers }) => {
+const Users = ({ users, followUserId, unfollowUserId,  isLoading, getUsers, getAllFriends }) => {
     useEffect(() => {
         getUsers()
     }, [])
 
-    const switchFollow= (isFollowed, id) =>{
+    const switchFollow= async (isFollowed, id) =>{
         if (isFollowed) {
-            unfollowUserId(id)
+          await  unfollowUserId(id)
         } else {
-            followUserId(id)
+          await  followUserId(id)
         }
+        getAllFriends()
     }
 
     const allUsers = users.map((user, index) => (
@@ -61,5 +63,6 @@ export const UsersContainer = connect(mapStateToProps, {
     setUsers: setUsersAC,
     followUserId,
     unfollowUserId,
+    getAllFriends
     
 })(Users)

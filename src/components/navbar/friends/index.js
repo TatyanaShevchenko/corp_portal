@@ -1,1 +1,1 @@
-export { Friends } from './Friends.jsx'
+export { FriendsContainer } from './Friends.jsx'

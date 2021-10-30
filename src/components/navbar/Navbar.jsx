@@ -5,10 +5,9 @@ import MenuItem from '@material-ui/core/MenuItem'
 import MenuList from '@material-ui/core/MenuList'
 
 import styles from './index.module.scss'
-import { Friends } from './friends'
+import { FriendsContainer } from './friends/Friends.jsx'
 
 export const Navbar = ({ data }) => {
-    const { friends } = data
     const [anchorEl, setAnchorEl] = useState(null)
     const [selectedIndex, setSelectedIndex] = useState(0)
 
@@ -42,7 +41,7 @@ export const Navbar = ({ data }) => {
                     </MenuItem>
                 ))}
             </MenuList>
-            <Friends friends={friends} />
+            <FriendsContainer  />
         </div>
     )
 }

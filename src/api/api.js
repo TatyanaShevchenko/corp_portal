@@ -8,9 +8,17 @@ const instance = axios.create({
 
 export async function getUsers(page = 1) {
     try {
-        const usersFromAPI = await instance.get(`/users?page=${page}`,
-       )
+        const usersFromAPI = await instance.get(`/users?page=${page}`)
         return usersFromAPI.data.items
+    } catch (error) {
+        console.warn(error)
+    }
+}
+
+export async function getFriends(){
+    try {
+        const friendsFromAPI = await instance.get(`/users?friend=true`)
+        return friendsFromAPI.data.items
     } catch (error) {
         console.warn(error)
     }

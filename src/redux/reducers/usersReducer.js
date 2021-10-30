@@ -1,15 +1,17 @@
 import { switchLoadingAC } from './loadingReducer'
-import { getUsers, getPagesCount, followUser, unfollowUser} from '../../api'
+import { getUsers, getFriends, getPagesCount, followUser, unfollowUser} from '../../api'
 
 // export const SWITCH_FOLLOW = 'SWITCH_FOLLOW'
 export const FOLLOW_USER = 'FOLLOW_USER'
 export const UNFOLLOW_USER = 'UNFOLLOW_USER'
 export const SET_USERS = 'SET_USERS'
+export const SET_FRIENDS = 'SET_FRIENDS'
 export const SET_PAGES = 'SET_PAGES'
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 
 let initialState = {
     users: [],
+    friends:[],
     pages: 0,
     currentPage: 1,
 }
@@ -24,6 +26,10 @@ export const unfollowUserAC = (payload) => {
 
 export const setUsersAC = (payload) => {
     return { type: SET_USERS, payload }
+}
+
+export const setFriends =  (payload) => {
+    return { type: SET_FRIENDS, payload }
 }
 
 export const setPagesAC = (payload) => {
@@ -81,6 +87,8 @@ export const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USERS:
             return { ...state, users: [...action.payload] }
+        case SET_FRIENDS:
+            return { ...state, friends: [...action.payload] }    
         case SET_PAGES:
             return { ...state, pages: action.payload }
         case SET_CURRENT_PAGE:
@@ -109,3 +117,16 @@ export const usersReducer = (state = initialState, action) => {
             return state
     }
 }
+
+
+export const getAllFriends = () => async (dispatch) => {
+        dispatch(switchLoadingAC(true))
+        try {
+            const friendsFromApi = await getFriends()
+            dispatch(setFriends(friendsFromApi))
+            dispatch(switchLoadingAC(false))
+        } catch (error) {
+            console.warn(error)
+        }
+    }
+    

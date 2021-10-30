@@ -4,7 +4,6 @@ import thunk from 'redux-thunk'
 import {
     profileReducer,
     dialogsReducer,
-    navbarReducer,
     usersReducer,
     loadingReducer,
     authReducer
@@ -14,7 +13,6 @@ let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
-    navbar: navbarReducer,
     loading: loadingReducer,
     auth: authReducer
 })
