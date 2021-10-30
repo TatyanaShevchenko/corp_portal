@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 import styles from './index.module.scss'
 
-export const User = ({ user, onButtonClick }) => {
+export const User = ({ user, onButtonClick, disabledBtnId }) => {
 
     return (
         <div className={styles.single__user}>
@@ -22,6 +22,7 @@ export const User = ({ user, onButtonClick }) => {
                 <p className={styles.single__user__status}>{user.status}</p>
             </div>
             <Button
+                disabled={disabledBtnId.some( el => el=== user.id) }
                 onClick={() => {
                     onButtonClick(user.followed, user.id)
                 }}

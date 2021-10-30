@@ -15,7 +15,7 @@ import {
 
 import styles from './index.module.scss'
 
-const Users = ({ users, followUserId, unfollowUserId,  isLoading, getUsers, getAllFriends }) => {
+const Users = ({ users,disabledBtnId, followUserId, unfollowUserId,  isLoading, getUsers, getAllFriends }) => {
     useEffect(() => {
         getUsers()
     }, [])
@@ -33,6 +33,7 @@ const Users = ({ users, followUserId, unfollowUserId,  isLoading, getUsers, getA
         <User
             key={index}
             user={user}
+            disabledBtnId={disabledBtnId}
             onButtonClick={switchFollow}
         />
     ))
@@ -54,6 +55,7 @@ const Users = ({ users, followUserId, unfollowUserId,  isLoading, getUsers, getA
 const mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,
+        disabledBtnId: state.usersPage.disabledBtnId,
         isLoading: state.loading.isLoading,
     }
 }
@@ -64,5 +66,4 @@ export const UsersContainer = connect(mapStateToProps, {
     followUserId,
     unfollowUserId,
     getAllFriends
-    
 })(Users)

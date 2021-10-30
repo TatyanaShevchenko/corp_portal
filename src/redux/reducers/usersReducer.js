@@ -1,7 +1,8 @@
 import { switchLoadingAC } from './loadingReducer'
 import { getUsers, getFriends, getPagesCount, followUser, unfollowUser} from '../../api'
 
-// export const SWITCH_FOLLOW = 'SWITCH_FOLLOW'
+export const SET_DISABLED_BUTTON = 'SET_DISABLED_BUTTON'
+export const UNSET_DISABLED_BUTTON = 'UNSET_DISABLED_BUTTON'
 export const FOLLOW_USER = 'FOLLOW_USER'
 export const UNFOLLOW_USER = 'UNFOLLOW_USER'
 export const SET_USERS = 'SET_USERS'
@@ -14,6 +15,15 @@ let initialState = {
     friends:[],
     pages: 0,
     currentPage: 1,
+    disabledBtnId: []
+}
+
+export const setBtnDisabled =(payload) => {
+    return {type: SET_DISABLED_BUTTON, payload}
+}
+
+export const unsetBtnDisabled =(payload)=>{
+    return { type:UNSET_DISABLED_BUTTON, payload}
 }
 
 export const followUserAC =  (payload) => {
@@ -61,22 +71,22 @@ export const setPages = () => async (dispatch) => {
 }
 
 export const followUserId =(id) => async(dispatch)=>{
-    dispatch(switchLoadingAC(true))
+    dispatch(setBtnDisabled(id))
     try {
         const res = await followUser(id)
         dispatch(followUserAC(id))
-        dispatch(switchLoadingAC(false))
+         dispatch(unsetBtnDisabled(id))
     } catch (error) {
         console.warn(error)
     }
 }
 
 export const unfollowUserId =(id) => async(dispatch)=>{
-    dispatch(switchLoadingAC(true))
+     dispatch(setBtnDisabled(id))
     try {
         const res = await unfollowUser(id)
         dispatch(unfollowUserAC(id))
-        dispatch(switchLoadingAC(false))
+         dispatch(unsetBtnDisabled(id))
     } catch (error) {
         console.warn(error)
     }
@@ -93,6 +103,10 @@ export const usersReducer = (state = initialState, action) => {
             return { ...state, pages: action.payload }
         case SET_CURRENT_PAGE:
             return { ...state, currentPage: action.payload }
+        case SET_DISABLED_BUTTON:
+            return {...state,disabledBtnId: [...state.disabledBtnId, action.payload]}
+        case UNSET_DISABLED_BUTTON:
+            return {...state, disabledBtnId: [...state.disabledBtnId.filter(id => id !== action.payload)]}    
         case FOLLOW_USER:
             return {
                 ...state,
@@ -120,11 +134,9 @@ export const usersReducer = (state = initialState, action) => {
 
 
 export const getAllFriends = () => async (dispatch) => {
-        dispatch(switchLoadingAC(true))
         try {
             const friendsFromApi = await getFriends()
             dispatch(setFriends(friendsFromApi))
-            dispatch(switchLoadingAC(false))
         } catch (error) {
             console.warn(error)
         }
