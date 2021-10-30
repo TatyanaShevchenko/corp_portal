@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { useParams } from 'react-router-dom'
 
-import { getProfile, addPost } from '../../redux/reducers'
+import { profile } from '../../redux/reducers'
 import { Loader } from '../loader'
 import { Info } from './info'
 import { MyPosts } from './my-posts'
@@ -44,7 +44,7 @@ const mapStateToProps = (state) => {
 
 export const ProfileContainer = withRouter(
     connect(mapStateToProps, {
-        getProfile,
-        addPost,
+        getProfile: profile.getProfile,
+        addPost: profile.addPost,
     })(Profile)
 )

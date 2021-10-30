@@ -1,10 +1,11 @@
 import styles from './index.module.scss'
 
 export const Friend = ({ friend }) => {
+
     return (
         <div className={styles.friend}>
             <img
-                src={friend.image || 
+                src={friend.photos.small || friend.photos.large ||
                     'https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png'}
                 alt={friend.name}
                 className={styles.friend__image}

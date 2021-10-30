@@ -1,13 +1,12 @@
 import { connect } from 'react-redux'
 
 import { Friend } from './friend'
-import {getAllFriends} from '../../../redux/reducers/usersReducer'
+import {users} from '../../../redux/reducers/usersReducer'
 
 import styles from './index.module.scss'
 import { useEffect } from 'react'
 
 const Friends = ({ friends, getAllFriends }) => {
-    console.log('friends', friends)
     
     useEffect(async()=>{
         getAllFriends()
@@ -33,5 +32,5 @@ const mapStateToProps = (state)=> {
 }
 
 export const FriendsContainer = connect(mapStateToProps, {
-    getAllFriends
+    getAllFriends: users.getAllFriends
 })(Friends)

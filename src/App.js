@@ -8,12 +8,12 @@ import { ProfileContainer } from './components/profile'
 import { DialogsContainer } from './components/dialogs'
 import { UsersContainer } from './components/users/Users.jsx'
 
-import {getAuthorisedInfo} from './redux/reducers/authReducer'
+import {auth} from './redux/reducers/authReducer'
 
 import 'reset-css'
 import styles from './App.module.scss'
 
-function App({userData,userMessages,isLoading, getAuthorisedInfo }) {
+function App({userData,userMessages, getAuthorisedInfo }) {
 
     useEffect(() => {
         getAuthorisedInfo()
@@ -53,4 +53,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export const AppContainer = connect(mapStateToProps, {getAuthorisedInfo})(App)
+export const AppContainer = connect(mapStateToProps, { getAuthorisedInfo:auth.getAuthorisedInfo })(App)

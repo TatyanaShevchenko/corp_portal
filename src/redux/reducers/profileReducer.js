@@ -13,23 +13,8 @@ let initialState = {
     ],
 }
 
-export const addPost = (payload) => {
-    return { type: ADD_POST, payload }
-}
-
 export const setProfile = (payload) => {
     return { type: SET_PROFILE, payload }
-}
-
-export const getProfile = (userId) => async (dispatch) => {
-    dispatch(switchLoadingAC(true))
-    try {
-        const profile = await getUserProfile(userId)
-        dispatch(setProfile(profile))
-        dispatch(switchLoadingAC(false))
-    } catch (error) {
-        console.warn(error)
-    }
 }
 
 export const profileReducer = (state = initialState, action) => {
@@ -47,5 +32,23 @@ export const profileReducer = (state = initialState, action) => {
             return { ...state, profile: { ...action.payload } }
         default:
             return state
+    }
+}
+
+export const profile = {
+    getProfile (userId) {
+        return async (dispatch) => {
+        dispatch(switchLoadingAC(true))
+        try {
+            const profile = await getUserProfile(userId)
+            dispatch(setProfile(profile))
+            dispatch(switchLoadingAC(false))
+        } catch (error) {
+            console.warn(error)
+        }
+    }
+    }, 
+     addPost (payload)  {
+        return { type: ADD_POST, payload }
     }
 }

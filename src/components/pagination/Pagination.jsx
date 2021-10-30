@@ -3,11 +3,7 @@ import { connect } from 'react-redux'
 
 import { Pagination } from '@material-ui/lab'
 
-import {
-    getAllUsers,
-    setPages,
-    setCurrentPage,
-} from '../../redux/reducers/usersReducer'
+import { users } from '../../redux/reducers/usersReducer'
 
 export const PaginationComponent = ({
     pages,
@@ -43,7 +39,7 @@ const mapStateToProps = (state) => {
 }
 
 export const PaginationContainer = connect(mapStateToProps, {
-    setCurrentPage,
-    getAllUsers,
-    setPages,
+    setCurrentPage: users.setCurrentPage,
+    getAllUsers: users.getAllUsers,
+    setPages: users.setPages,
 })(PaginationComponent)

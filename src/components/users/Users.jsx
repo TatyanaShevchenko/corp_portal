@@ -5,26 +5,28 @@ import { User } from './components/User.jsx'
 import { Loader } from '../loader'
 import { PaginationContainer } from '../pagination/Pagination.jsx'
 
-import {
-    setUsersAC,
-    followUserId,
-    unfollowUserId,
-    getAllUsers,
-    getAllFriends
-} from '../../redux/reducers/usersReducer'
+import { users } from '../../redux/reducers/usersReducer'
 
 import styles from './index.module.scss'
 
-const Users = ({ users,disabledBtnId, followUserId, unfollowUserId,  isLoading, getUsers, getAllFriends }) => {
+const Users = ({
+    users,
+    disabledBtnId,
+    followUserId,
+    unfollowUserId,
+    isLoading,
+    getUsers,
+    getAllFriends,
+}) => {
     useEffect(() => {
         getUsers()
     }, [])
 
-    const switchFollow= async (isFollowed, id) =>{
+    const switchFollow = async (isFollowed, id) => {
         if (isFollowed) {
-          await  unfollowUserId(id)
+            await unfollowUserId(id)
         } else {
-          await  followUserId(id)
+            await followUserId(id)
         }
         getAllFriends()
     }
@@ -61,9 +63,8 @@ const mapStateToProps = (state) => {
 }
 
 export const UsersContainer = connect(mapStateToProps, {
-    getUsers: getAllUsers,
-    setUsers: setUsersAC,
-    followUserId,
-    unfollowUserId,
-    getAllFriends
+    getUsers: users.getAllUsers,
+    followUserId: users.followUserId,
+    unfollowUserId: users.unfollowUserId,
+    getAllFriends: users.getAllFriends,
 })(Users)
