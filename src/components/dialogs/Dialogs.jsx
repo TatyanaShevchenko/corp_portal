@@ -1,11 +1,16 @@
+import { Redirect } from 'react-router'
+
 import { Dialog } from './dialog'
 import { Message } from './message'
 import { AddMessage } from './add-message'
 import styles from './index.module.scss'
 
-export const Dialogs = ({ data, addMessage }) => {
+export const Dialogs = ({ isAuth, data, addMessage }) => {
     const { dialogs, messages } = data
 
+    if (!isAuth) {
+        return <Redirect to="/login" />
+    }
     return (
         <div className={styles.dialogs__wrapper}>
             <p className={styles.title}>Dialogs</p>

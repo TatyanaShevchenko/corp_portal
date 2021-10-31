@@ -7,6 +7,7 @@ import { NavbarContainer } from './components/navbar'
 import { ProfileContainer } from './components/profile'
 import { DialogsContainer } from './components/dialogs'
 import { UsersContainer } from './components/users/Users.jsx'
+import { Login } from './components/login'
 
 import {auth} from './redux/reducers/authReducer'
 
@@ -19,21 +20,26 @@ function App({userData,userMessages, getAuthorisedInfo }) {
         getAuthorisedInfo()
     }, [])
 
+    const isAuth = Boolean(userData.id);
+
     return (
         <Router>
             <div className={styles.app}>
-                <Header userData={userData} userMessages={userMessages}/>
+                <Header userData={userData}/>
                 <NavbarContainer />
                 <div className={styles.content}>
                     <Switch>
                         <Route exact path="/dialogs">
-                            <DialogsContainer />
+                            <DialogsContainer isAuth={isAuth}/>
                         </Route>
                         <Route exact path="/users">
                             <UsersContainer />
                         </Route>
                         <Route path="/profile/:userId?">
-                            <ProfileContainer />
+                            <ProfileContainer isAuth={isAuth}/>
+                        </Route>
+                        <Route path="/login">
+                            <Login />
                         </Route>
                         <Route exact path="/">
                             <ProfileContainer />

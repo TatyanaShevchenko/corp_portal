@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { useParams } from 'react-router-dom'
+import { Redirect } from 'react-router'
 
 import { profile } from '../../redux/reducers'
 import { Loader } from '../loader'
@@ -10,7 +11,16 @@ import { MyPosts } from './my-posts'
 
 import styles from './index.module.scss'
 
-const Profile = ({userData, profile, getProfile, posts, addPost, isLoading, match }) => {
+const Profile = ({
+    isAuth,
+    userData,
+    profile,
+    getProfile,
+    posts,
+    addPost,
+    isLoading,
+    match,
+}) => {
     // const { userId } = useParams()
 
     const { userId } = match.params
@@ -18,6 +28,10 @@ const Profile = ({userData, profile, getProfile, posts, addPost, isLoading, matc
     useEffect(() => {
         getProfile(userId || userData.id)
     }, [userData.id, userId])
+
+    if (!isAuth) {
+        return <Redirect to="/login" />
+    }
 
     return (
         <>
