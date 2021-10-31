@@ -9,34 +9,35 @@ import { DialogsContainer } from './components/dialogs'
 import { UsersContainer } from './components/users/Users.jsx'
 import { Login } from './components/login'
 
-import {auth} from './redux/reducers/authReducer'
+import { withAuth } from './utils/withAuth'
+
+import { auth } from './redux/reducers/authReducer'
 
 import 'reset-css'
 import styles from './App.module.scss'
 
-function App({userData,userMessages, getAuthorisedInfo }) {
-
+function App({ userData, userMessages, getAuthorisedInfo }) {
     useEffect(() => {
         getAuthorisedInfo()
     }, [])
 
-    const isAuth = Boolean(userData.id);
+    const isAuth = Boolean(userData.id)
 
     return (
         <Router>
             <div className={styles.app}>
-                <Header userData={userData}/>
+                <Header userData={userData} />
                 <NavbarContainer />
                 <div className={styles.content}>
                     <Switch>
                         <Route exact path="/dialogs">
-                            <DialogsContainer isAuth={isAuth}/>
+                            {withAuth(DialogsContainer, isAuth)}
                         </Route>
                         <Route exact path="/users">
                             <UsersContainer />
                         </Route>
                         <Route path="/profile/:userId?">
-                            <ProfileContainer isAuth={isAuth}/>
+                            {withAuth(ProfileContainer, isAuth)}
                         </Route>
                         <Route path="/login">
                             <Login />
@@ -59,4 +60,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-export const AppContainer = connect(mapStateToProps, { getAuthorisedInfo:auth.getAuthorisedInfo })(App)
+export const AppContainer = connect(mapStateToProps, {
+    getAuthorisedInfo: auth.getAuthorisedInfo,
+})(App)

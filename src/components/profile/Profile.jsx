@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { useParams } from 'react-router-dom'
-import { Redirect } from 'react-router'
 
 import { profile } from '../../redux/reducers'
 import { Loader } from '../loader'
@@ -12,7 +11,6 @@ import { MyPosts } from './my-posts'
 import styles from './index.module.scss'
 
 const Profile = ({
-    isAuth,
     userData,
     profile,
     getProfile,
@@ -28,10 +26,6 @@ const Profile = ({
     useEffect(() => {
         getProfile(userId || userData.id)
     }, [userData.id, userId])
-
-    if (!isAuth) {
-        return <Redirect to="/login" />
-    }
 
     return (
         <>
