@@ -1,11 +1,11 @@
 import { Redirect } from 'react-router'
 
-export function withAuth(WrappedComponent, isAuth) {
-    const RedirectComponent = () => {
+export function withAuth(WrappedComponent) {
+    const RedirectComponent = ({isAuth, ...props}) => {
         if (!isAuth) {
             return <Redirect to="/login" />
         }
-        return <WrappedComponent />
+        return <WrappedComponent {...props}/>
     }
     return RedirectComponent
 }

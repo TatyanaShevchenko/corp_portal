@@ -1,6 +1,9 @@
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 
-import { Dialogs } from './index'
+import { Dialogs } from './Dialogs.jsx'
+
+import { withAuth } from '../../utils/withAuth'
 import { addMessage } from '../../redux/reducers'
 
 const mapStateToProps = (state) => {
@@ -9,6 +12,9 @@ const mapStateToProps = (state) => {
     }
 }
 
-export const DialogsContainer = connect(mapStateToProps, {
-    addMessage,
-})(Dialogs)
+export default compose(
+    connect(mapStateToProps, {
+        addMessage,
+    }),
+    withAuth
+)(Dialogs)

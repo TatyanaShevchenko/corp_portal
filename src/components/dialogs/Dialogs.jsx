@@ -4,7 +4,7 @@ import { AddMessage } from './add-message'
 import styles from './index.module.scss'
 
 export const Dialogs = ({ data, addMessage }) => {
-    const { dialogs, messages } = data
+       const { dialogs, messages } = data
 
     return (
         <div className={styles.dialogs__wrapper}>

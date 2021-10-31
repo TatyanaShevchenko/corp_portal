@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { useParams } from 'react-router-dom'
 
+import { withAuth } from '../../utils/withAuth'
 import { profile } from '../../redux/reducers'
 import { Loader } from '../loader'
 import { Info } from './info'
 import { MyPosts } from './my-posts'
 
 import styles from './index.module.scss'
+import { compose } from 'redux'
 
 const Profile = ({
     userData,
@@ -50,9 +52,11 @@ const mapStateToProps = (state) => {
     }
 }
 
-export const ProfileContainer = withRouter(
+export const ProfileContainer = compose(
     connect(mapStateToProps, {
         getProfile: profile.getProfile,
         addPost: profile.addPost,
-    })(Profile)
-)
+    }),
+    withRouter,
+    withAuth
+)(Profile)

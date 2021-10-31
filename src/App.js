@@ -5,23 +5,19 @@ import { connect } from 'react-redux'
 import { Header } from './components/header'
 import { NavbarContainer } from './components/navbar'
 import { ProfileContainer } from './components/profile'
-import { DialogsContainer } from './components/dialogs'
+import DialogsContainer from './components/dialogs/DialogsContainer.jsx'
 import { UsersContainer } from './components/users/Users.jsx'
 import { Login } from './components/login'
-
-import { withAuth } from './utils/withAuth'
 
 import { auth } from './redux/reducers/authReducer'
 
 import 'reset-css'
 import styles from './App.module.scss'
 
-function App({ userData, userMessages, getAuthorisedInfo }) {
+function App({ userData, userMessages, isAuth, getAuthorisedInfo }) {
     useEffect(() => {
         getAuthorisedInfo()
     }, [])
-
-    const isAuth = Boolean(userData.id)
 
     return (
         <Router>
@@ -31,13 +27,13 @@ function App({ userData, userMessages, getAuthorisedInfo }) {
                 <div className={styles.content}>
                     <Switch>
                         <Route exact path="/dialogs">
-                            {withAuth(DialogsContainer, isAuth)}
+                            <DialogsContainer isAuth={isAuth} />
                         </Route>
                         <Route exact path="/users">
                             <UsersContainer />
                         </Route>
                         <Route path="/profile/:userId?">
-                            {withAuth(ProfileContainer, isAuth)}
+                            <ProfileContainer isAuth={isAuth} />
                         </Route>
                         <Route path="/login">
                             <Login />
@@ -57,6 +53,7 @@ const mapStateToProps = (state) => {
         userData: state.auth.data,
         userMessages: state.auth.messages,
         isLoading: state.loading.isLoading,
+        isAuth: state.auth.isAuth,
     }
 }
 
