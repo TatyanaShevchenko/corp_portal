@@ -11,6 +11,7 @@ import { MyPosts } from './my-posts'
 
 import styles from './index.module.scss'
 import { compose } from 'redux'
+import { Status } from './status'
 
 const Profile = ({
     userData,
@@ -36,6 +37,7 @@ const Profile = ({
                 <div className={styles.profile}>
                     <p className={styles.title}>Profile</p>
                     <Info profile={profile} />
+                    <Status data="test status" />
                     <MyPosts posts={posts} addPost={addPost} />
                 </div>
             )}
