@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField'
 
 import styles from './index.module.scss'
 
-export const Status = ({ data }) => {
+export const Status = ({ data, setStatus }) => {
     const [value, setValue] = useState(data)
     const [editMode, setEditMode] = useState(false)
 
@@ -13,6 +13,7 @@ export const Status = ({ data }) => {
 
     const handleBlur = () => {
         setEditMode(false)
+        setStatus(value)
     }
     return (
         <div className={styles.status}>
@@ -22,7 +23,7 @@ export const Status = ({ data }) => {
                 onClick={handleClick}
                 onKeyDown={handleClick}
             >
-                {value}
+                {data}
             </p>}
             {editMode && (
                 <TextField

@@ -1,4 +1,4 @@
-import { getAuthorisedData } from '../../api'
+import { authAPI } from '../../api'
 import { switchLoadingAC } from './loadingReducer'
 
 const SET_AUTH = 'SET_AUTH'
@@ -45,7 +45,7 @@ export const auth = {
         return async (dispatch) => {
             dispatch(switchLoadingAC(true))
             try {
-                const authorisedUserInfo = await getAuthorisedData()
+                const authorisedUserInfo = await authAPI.getAuthorisedData()
                 if (authorisedUserInfo.resultCode === 0) {
                     dispatch(setUserInfo(authorisedUserInfo))
                     dispatch(setUserMessages(authorisedUserInfo))

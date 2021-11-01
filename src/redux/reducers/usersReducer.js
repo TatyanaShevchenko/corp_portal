@@ -1,10 +1,7 @@
 import { switchLoadingAC } from './loadingReducer'
 import {
-    getUsers,
-    getFriends,
     getPagesCount,
-    followUser,
-    unfollowUser,
+    usersAPI
 } from '../../api'
 
 export const SET_DISABLED_BUTTON = 'SET_DISABLED_BUTTON'
@@ -104,7 +101,7 @@ export const users = {
         return async (dispatch) => {
             dispatch(switchLoadingAC(true))
             try {
-                const usersFromAPI = await getUsers(page)
+                const usersFromAPI = await usersAPI.getUsers(page)
                 dispatch(setUsersAC(usersFromAPI))
                 dispatch(switchLoadingAC(false))
             } catch (error) {
@@ -116,7 +113,7 @@ export const users = {
     getAllFriends() {
         return async (dispatch) => {
             try {
-                const friendsFromApi = await getFriends()
+                const friendsFromApi = await usersAPI.getFriends()
                 dispatch(setFriends(friendsFromApi))
             } catch (error) {
                 console.warn(error)
@@ -139,7 +136,7 @@ export const users = {
         return async (dispatch) => {
             dispatch(setBtnDisabled(id))
             try {
-                const res = await followUser(id)
+                const res = await usersAPI.followUser(id)
                 dispatch(followUserAC(id))
                 dispatch(unsetBtnDisabled(id))
             } catch (error) {
@@ -152,7 +149,7 @@ export const users = {
         return async (dispatch) => {
             dispatch(setBtnDisabled(id))
             try {
-                const res = await unfollowUser(id)
+                const res = await usersAPI.unfollowUser(id)
                 dispatch(unfollowUserAC(id))
                 dispatch(unsetBtnDisabled(id))
             } catch (error) {

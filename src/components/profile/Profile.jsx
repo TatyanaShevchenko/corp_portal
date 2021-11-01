@@ -16,18 +16,25 @@ import { Status } from './status'
 const Profile = ({
     userData,
     profile,
+    status,
     getProfile,
+    getProfileStatus,
     posts,
     addPost,
+    setStatus,
     isLoading,
-    match,
+    match
 }) => {
     // const { userId } = useParams()
 
     const { userId } = match.params
 
     useEffect(() => {
-        getProfile(userId || userData.id)
+        async function fetchData() {
+            await getProfile(userId || userData.id)
+            getProfileStatus(userId || userData.id)
+        }
+        fetchData()
     }, [userData.id, userId])
 
     return (
@@ -37,7 +44,7 @@ const Profile = ({
                 <div className={styles.profile}>
                     <p className={styles.title}>Profile</p>
                     <Info profile={profile} />
-                    <Status data="test status" />
+                    <Status data={status} setStatus={setStatus} />
                     <MyPosts posts={posts} addPost={addPost} />
                 </div>
             )}
@@ -49,6 +56,7 @@ const mapStateToProps = (state) => {
     return {
         userData: state.auth.data,
         profile: state.profilePage.profile,
+        status: state.profilePage.status,
         isLoading: state.loading.isLoading,
         posts: state.profilePage.posts,
     }
@@ -58,7 +66,9 @@ export const ProfileContainer = compose(
     connect(mapStateToProps, {
         getProfile: profile.getProfile,
         addPost: profile.addPost,
+        setStatus: profile.setMyStatus,
+        getProfileStatus: profile.getProfileStatus,
     }),
+    withAuth,
     withRouter,
-    withAuth
 )(Profile)

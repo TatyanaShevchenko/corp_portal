@@ -16,7 +16,10 @@ import styles from './App.module.scss'
 
 function App({ userData, userMessages, isAuth, getAuthorisedInfo }) {
     useEffect(() => {
-        getAuthorisedInfo()
+        async function fetchData() {
+        await getAuthorisedInfo()
+    }
+    fetchData()
     }, [])
 
     return (
@@ -39,7 +42,7 @@ function App({ userData, userMessages, isAuth, getAuthorisedInfo }) {
                             <Login />
                         </Route>
                         <Route exact path="/">
-                            <ProfileContainer />
+                            <ProfileContainer isAuth={isAuth}/>
                         </Route>
                     </Switch>
                 </div>
