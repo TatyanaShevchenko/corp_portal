@@ -1,8 +1,5 @@
 import { switchLoadingAC } from './loadingReducer'
-import {
-    getPagesCount,
-    usersAPI
-} from '../../api'
+import { getPagesCount, usersAPI } from '../../api'
 
 export const SET_DISABLED_BUTTON = 'SET_DISABLED_BUTTON'
 export const UNSET_DISABLED_BUTTON = 'UNSET_DISABLED_BUTTON'
@@ -103,9 +100,10 @@ export const users = {
             try {
                 const usersFromAPI = await usersAPI.getUsers(page)
                 dispatch(setUsersAC(usersFromAPI))
-                dispatch(switchLoadingAC(false))
             } catch (error) {
                 console.warn(error)
+            } finally {
+                dispatch(switchLoadingAC(false))
             }
         }
     },

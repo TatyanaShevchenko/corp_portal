@@ -1,13 +1,10 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { Header } from './components/header'
 import { NavbarContainer } from './components/navbar'
-import { ProfileContainer } from './components/profile'
-import DialogsContainer from './components/dialogs/DialogsContainer.jsx'
-import { UsersContainer } from './components/users/Users.jsx'
-import { Login } from './components/login'
+import { MainContent } from './components/main-content'
 
 import { auth } from './redux/reducers/authReducer'
 
@@ -17,37 +14,22 @@ import styles from './App.module.scss'
 function App({ userData, userMessages, isAuth, getAuthorisedInfo }) {
     useEffect(() => {
         async function fetchData() {
-        await getAuthorisedInfo()
-    }
-    fetchData()
+            await getAuthorisedInfo()
+        }
+        fetchData()
     }, [])
 
     return (
+        <div className={styles.app}>
         <Router>
-            <div className={styles.app}>
                 <Header userData={userData} />
                 <NavbarContainer />
                 <div className={styles.content}>
-                    <Switch>
-                        <Route exact path="/dialogs">
-                            <DialogsContainer isAuth={isAuth} />
-                        </Route>
-                        <Route exact path="/users">
-                            <UsersContainer />
-                        </Route>
-                        <Route path="/profile/:userId?">
-                            <ProfileContainer isAuth={isAuth} />
-                        </Route>
-                        <Route path="/login">
-                            <Login />
-                        </Route>
-                        <Route exact path="/">
-                            <ProfileContainer isAuth={isAuth}/>
-                        </Route>
-                    </Switch>
+                 <MainContent isAuth={isAuth} />
                 </div>
-            </div>
+          
         </Router>
+        </div>
     )
 }
 
@@ -55,7 +37,6 @@ const mapStateToProps = (state) => {
     return {
         userData: state.auth.data,
         userMessages: state.auth.messages,
-        isLoading: state.loading.isLoading,
         isAuth: state.auth.isAuth,
     }
 }

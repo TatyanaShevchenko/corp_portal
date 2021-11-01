@@ -1,12 +1,18 @@
 import { Dialog } from './dialog'
 import { Message } from './message'
 import { AddMessage } from './add-message'
+
+import { Loader } from '../loader'
+
 import styles from './index.module.scss'
 
-export const Dialogs = ({ data, addMessage }) => {
+export const Dialogs = ({ data, isLoading, addMessage }) => {
        const { dialogs, messages } = data
 
     return (
+        <>
+        {isLoading && <Loader />}
+        {!isLoading && (
         <div className={styles.dialogs__wrapper}>
             <p className={styles.title}>Dialogs</p>
             <div className={styles.grid}>
@@ -25,5 +31,7 @@ export const Dialogs = ({ data, addMessage }) => {
             </div>
             <AddMessage addMessage={addMessage} />
         </div>
+         )}
+         </>
     )
 }

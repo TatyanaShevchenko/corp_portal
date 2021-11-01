@@ -50,9 +50,10 @@ export const profile = {
             try {
                 const profile = await profileAPI.getProfile(userId)
                 dispatch(setProfile(profile))
-                dispatch(switchLoadingAC(false))
             } catch (error) {
                 console.warn(error)
+            } finally {
+                dispatch(switchLoadingAC(false))
             }
         }
     },

@@ -53,9 +53,10 @@ export const auth = {
                 } else {
                     dispatch(setAuth(false))
                 }
-                dispatch(switchLoadingAC(false))
             } catch (error) {
                 console.warn(error)
+            } finally {
+                dispatch(switchLoadingAC(false))
             }
         }
     },
