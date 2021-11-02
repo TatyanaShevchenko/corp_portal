@@ -60,17 +60,36 @@ export const auth = {
             }
         }
     },
-    authoriseMe(email,password,rememberMe, captcha){
+    login(email,password,rememberMe, captcha){
         return async (dispatch) => {
             dispatch(switchLoadingAC(true))
             try {
-                const authorisedUserInfo = await authAPI.authoriseMe(email,password,rememberMe, captcha)
+                const authorisedUserInfo = await authAPI.login(email,password,rememberMe, captcha)
                 if (authorisedUserInfo.resultCode === 0) {
                     dispatch(setUserInfo(authorisedUserInfo))
                     dispatch(setUserMessages(authorisedUserInfo))
                     dispatch(setAuth(true))
                 } else {
                     dispatch(setAuth(false))
+                }
+            } catch (error) {
+                console.warn(error)
+            } finally {
+                dispatch(switchLoadingAC(false))
+            } 
+        }
+    }, 
+    logout (){
+        return async (dispatch) => {
+            dispatch(switchLoadingAC(true))
+            try {
+                const res = await authAPI.logout()
+                if (res.resultCode === 0) {
+                    dispatch(setUserInfo(res))
+                    dispatch(setUserMessages(res))
+                    dispatch(setAuth(false))
+                } else {
+                    console.warn('something went wrong')
                 }
             } catch (error) {
                 console.warn(error)

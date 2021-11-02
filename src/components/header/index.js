@@ -1,1 +1,1 @@
-export { Header } from './Header.jsx'
+export { HeaderContainer } from './Header.jsx'

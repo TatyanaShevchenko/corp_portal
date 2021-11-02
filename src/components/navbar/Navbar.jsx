@@ -26,22 +26,24 @@ export const Navbar = ({ data }) => {
         <div className={styles.navbar}>
             <MenuList>
                 {options.map((option, index) => (
-                    <MenuItem
+                    <NavLink
                         key={option.name}
-                        selected={index === selectedIndex}
-                        onClick={(event) => handleMenuItemClick(event, index)}
+                        exact={option.exact}
+                        to={option.link}
+                        className={styles.navbar__link}
                     >
-                        <NavLink
-                            exact={option.exact}
-                            to={option.link}
-                            className={styles.navbar__link}
+                        <MenuItem
+                            selected={index === selectedIndex}
+                            onClick={(event) =>
+                                handleMenuItemClick(event, index)
+                            }
                         >
                             {option.name}
-                        </NavLink>
-                    </MenuItem>
+                        </MenuItem>
+                    </NavLink>
                 ))}
             </MenuList>
-            <FriendsContainer  />
+            <FriendsContainer />
         </div>
     )
 }

@@ -89,9 +89,17 @@ export const authAPI = {
         }
     },
 
-    async authoriseMe(email,password,rememberMe = false, captcha = "" ) {
+    async login (email,password,rememberMe = false, captcha = "" ) {
         try {
             const res = await instance.post(`/auth/login`, { email,password,rememberMe, captcha})
+            return res.data
+        }catch (error) {
+            console.warn(error)
+        }
+    },
+    async logout() {
+        try {
+            const res = await instance.delete(`/auth/login`)
             return res.data
         }catch (error) {
             console.warn(error)

@@ -2,7 +2,6 @@ import { Redirect } from 'react-router'
 import { Formik, Field, Form } from 'formik'
 import { connect } from 'react-redux'
 
-import Checkbox from '@material-ui/core/Checkbox'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
@@ -10,7 +9,7 @@ import { auth } from '../../redux/reducers/authReducer'
 
 import styles from './index.module.scss'
 
-export const Login = ({ isAuth, authoriseMe }) => {
+export const Login = ({ isAuth, login }) => {
     if (isAuth) {
         return <Redirect to="/" />
     }
@@ -18,7 +17,7 @@ export const Login = ({ isAuth, authoriseMe }) => {
     const onSubmit = async (values, { setSubmitting }) => {
         const { email, password, remember } = values
         const rememberMe = Boolean(remember.length)
-        await authoriseMe(email, password, rememberMe)
+        await login(email, password, rememberMe)
         setSubmitting(false)
     }
 
@@ -103,5 +102,5 @@ const mapStateToProps = (state) => {
     }
 }
 export const LoginContainer = connect(mapStateToProps, {
-    authoriseMe: auth.authoriseMe,
+    login: auth.login,
 })(Login)

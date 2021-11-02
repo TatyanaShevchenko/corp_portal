@@ -17,13 +17,19 @@
     background-color: #feca57;
 }
 
-.login a{
+.login a {
     @include bold-title;
     color: white;
     text-decoration: none;
     cursor: pointer;
 
-    &:hover{
-       color:#feca57;
+    &:hover {
+        color: #feca57;
     }
+}
+
+.right__content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }

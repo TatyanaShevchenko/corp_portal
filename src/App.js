@@ -2,7 +2,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import { Header } from './components/header'
+import { HeaderContainer } from './components/header'
 import { NavbarContainer } from './components/navbar'
 import { MainContent } from './components/main-content'
 
@@ -17,12 +17,12 @@ function App({ userData, userMessages, isAuth, getAuthorisedInfo }) {
             await getAuthorisedInfo()
         }
         fetchData()
-    }, [])
+    }, [isAuth])
 
     return (
         <div className={styles.app}>
         <Router>
-                <Header userData={userData} />
+                <HeaderContainer />
                 <NavbarContainer />
                 <div className={styles.content}>
                  <MainContent isAuth={isAuth} />
