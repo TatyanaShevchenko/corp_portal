@@ -1,21 +1,32 @@
 import { Redirect } from 'react-router'
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Field, Form } from 'formik'
+import { connect } from 'react-redux'
 
-import Checkbox from "@material-ui/core/Checkbox";
+import Checkbox from '@material-ui/core/Checkbox'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
+import { auth } from '../../redux/reducers/authReducer'
+
 import styles from './index.module.scss'
 
-export const Login = ({ isAuth }) => {
+export const Login = ({ isAuth, authoriseMe }) => {
     if (isAuth) {
         return <Redirect to="/" />
     }
+
+    const onSubmit = async (values, { setSubmitting }) => {
+        const { email, password, remember } = values
+        const rememberMe = Boolean(remember.length)
+        await authoriseMe(email, password, rememberMe)
+        setSubmitting(false)
+    }
+
     return (
         <div className={styles.login}>
             <p className={styles.title}>Login</p>
             <Formik
-                initialValues={{ email: '', password: '' }}
+                initialValues={{ email: '', password: '', remember: [] }}
                 validate={(values) => {
                     const errors = {}
                     if (!values.email) {
@@ -29,12 +40,7 @@ export const Login = ({ isAuth }) => {
                     }
                     return errors
                 }}
-                onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2))
-                        setSubmitting(false)
-                    }, 400)
-                }}
+                onSubmit={onSubmit}
             >
                 {({
                     values,
@@ -46,9 +52,9 @@ export const Login = ({ isAuth }) => {
                     isSubmitting,
                     /* and other goodies */
                 }) => (
-                    <form onSubmit={handleSubmit} className={styles.form}>
+                    <Form onSubmit={handleSubmit} className={styles.form}>
                         <TextField
-                        className={styles.input}
+                            className={styles.input}
                             type="email"
                             name="email"
                             onChange={handleChange}
@@ -57,7 +63,7 @@ export const Login = ({ isAuth }) => {
                         />
                         {errors.email && touched.email && errors.email}
                         <TextField
-                        className={styles.input}
+                            className={styles.input}
                             type="password"
                             name="password"
                             onChange={handleChange}
@@ -65,7 +71,16 @@ export const Login = ({ isAuth }) => {
                             value={values.password}
                         />
                         {errors.password && touched.password && errors.password}
-                        <Checkbox label="Remember me"/>
+
+                        <label htmlFor="remember">
+                            <Field
+                                type="checkbox"
+                                name="remember"
+                                value="remember"
+                            />
+                            Remember Me
+                        </label>
+
                         <Button
                             className={styles.btn}
                             type="submit"
@@ -75,9 +90,18 @@ export const Login = ({ isAuth }) => {
                         >
                             Login
                         </Button>
-                    </form>
+                    </Form>
                 )}
             </Formik>
         </div>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.auth.isAuth,
+    }
+}
+export const LoginContainer = connect(mapStateToProps, {
+    authoriseMe: auth.authoriseMe,
+})(Login)

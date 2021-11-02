@@ -82,12 +82,19 @@ export const profileAPI = {
 export const authAPI = {
     async getAuthorisedData() {
         try {
-            const authorisationData = await instance.get(`/auth/me`, {
-                withCredentials: true,
-            })
+            const authorisationData = await instance.get(`/auth/me`)
             return authorisationData.data
         } catch (error) {
             console.warn(error)
         }
     },
+
+    async authoriseMe(email,password,rememberMe = false, captcha = "" ) {
+        try {
+            const res = await instance.post(`/auth/login`, { email,password,rememberMe, captcha})
+            return res.data
+        }catch (error) {
+            console.warn(error)
+        }
+    }
 }

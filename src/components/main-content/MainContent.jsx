@@ -1,10 +1,10 @@
 import { BrowserRouter as  Router, Switch, Route } from 'react-router-dom'
-import { connect } from 'react-redux'
+
 
 import { ProfileContainer } from '../profile'
 import DialogsContainer from '../dialogs/DialogsContainer.jsx'
 import { UsersContainer } from '../users/Users.jsx'
-import { Login } from '../login'
+import { LoginContainer } from '../login'
 
 export const MainContent = ({ isAuth }) => {
 
@@ -23,7 +23,7 @@ export const MainContent = ({ isAuth }) => {
                 <ProfileContainer isAuth={isAuth}/>
             </Route>
             <Route path="/login">
-                <Login isAuth={isAuth} />
+                <LoginContainer  />
             </Route>
         </Switch>
     )
