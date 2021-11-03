@@ -71,6 +71,7 @@ export const auth = {
                     dispatch(setAuth(true))
                 } else {
                     dispatch(setAuth(false))
+                    return authorisedUserInfo
                 }
             } catch (error) {
                 console.warn(error)

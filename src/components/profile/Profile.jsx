@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { useParams } from 'react-router-dom'
 
 import { profile } from '../../redux/reducers'
 import { Loader } from '../loader'
@@ -26,14 +25,13 @@ const Profile = ({
     isLoading,
     match
 }) => {
-    // const { userId } = useParams()
 
     const { userId } = match.params
 
     useEffect(() => {
         async function fetchData() {
             await getProfile(userId || userData.id)
-            getProfileStatus(userId || userData.id)
+            await getProfileStatus(userId || userData.id)
         }
         fetchData()
     }, [userData.id, userId])

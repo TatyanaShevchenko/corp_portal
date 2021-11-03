@@ -28,3 +28,9 @@
 .btn {
     margin-top: 24px !important;
 }
+
+.error {
+    @include title;
+    margin-top: 8px;
+    color: red;
+}
