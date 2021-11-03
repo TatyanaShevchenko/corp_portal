@@ -18,6 +18,8 @@ let initialState = {
     ],
 }
 
+export const selectDialogsData = state => state.dialogsPage;
+
 export const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:

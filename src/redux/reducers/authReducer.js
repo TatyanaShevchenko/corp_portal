@@ -16,6 +16,10 @@ let initialState = {
     isAuth: false,
 }
 
+// selectors
+export const selectIsAuth = state => state.auth.isAuth
+// selectors
+
 const setAuth = (payload) => {
     return { type: SET_AUTH, payload }
 }

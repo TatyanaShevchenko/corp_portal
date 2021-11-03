@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import MuiAlert from '@mui/material/Alert'
 
-import { auth } from '../../redux/reducers/authReducer'
+import { auth, selectIsAuth } from '../../redux/reducers/authReducer'
 
 import styles from './index.module.scss'
 
@@ -109,7 +109,7 @@ export const Login = ({ isAuth, login }) => {
 
 const mapStateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth,
+        isAuth: selectIsAuth(state)
     }
 }
 export const LoginContainer = connect(mapStateToProps, {

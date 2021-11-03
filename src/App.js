@@ -7,13 +7,13 @@ import { NavbarContainer } from './components/navbar'
 import { MainContent } from './components/main-content'
 import { Loader } from './components/loader'
 
-import { auth } from './redux/reducers/authReducer'
-
+import { auth, selectIsAuth } from './redux/reducers/authReducer'
+import {selectIsLoading} from './redux/reducers/loadingReducer'
+ 
 import 'reset-css'
 import styles from './App.module.scss'
 
 function App({ isAuth, isLoading, getAuthorisedInfo }) {
-    console.log(`Loading ${isLoading}`)
 
     useEffect(() => {
         async function fetchData() {
@@ -38,8 +38,8 @@ function App({ isAuth, isLoading, getAuthorisedInfo }) {
 
 const mapStateToProps = (state) => {
     return {
-        isLoading: state.loading.isLoading,
-        isAuth: state.auth.isAuth,
+        isLoading: selectIsLoading(state),
+        isAuth: selectIsAuth(state)
     }
 }
 

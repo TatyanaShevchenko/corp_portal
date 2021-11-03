@@ -31,7 +31,7 @@ const Profile = ({
             await getProfileStatus(userId || userData.id)
         }
         fetchData()
-    }, [userId])
+    }, [userId, userData.id])
 
     return (
         <div className={styles.profile}>

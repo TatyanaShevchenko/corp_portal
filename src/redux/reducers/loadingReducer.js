@@ -8,6 +8,8 @@ export const switchLoadingAC = (payload) => {
     return { type: SWITCH_LOADING, payload }
 }
 
+export const selectIsLoading = state => state.loading.isLoading
+
 export const loadingReducer = (state = initialState, action) => {
     switch (action.type) {
         case SWITCH_LOADING:
