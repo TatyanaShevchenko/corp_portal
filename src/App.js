@@ -2,6 +2,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
 
+import { Loader } from './components/loader'
 import { HeaderContainer } from './components/header'
 import { NavbarContainer } from './components/navbar'
 import { MainContent } from './components/main-content'
@@ -11,7 +12,7 @@ import { auth } from './redux/reducers/authReducer'
 import 'reset-css'
 import styles from './App.module.scss'
 
-function App({ userData, userMessages, isAuth, getAuthorisedInfo }) {
+function App({ isAuth, isLoading, getAuthorisedInfo }) {
     useEffect(() => {
         async function fetchData() {
             await getAuthorisedInfo()
@@ -21,22 +22,21 @@ function App({ userData, userMessages, isAuth, getAuthorisedInfo }) {
 
     return (
         <div className={styles.app}>
-        <Router>
+            <Router>
                 <HeaderContainer />
                 <NavbarContainer />
                 <div className={styles.content}>
-                 <MainContent isAuth={isAuth} />
+                    {isLoading && <Loader />}
+                    {!isLoading && <MainContent isAuth={isAuth} />}
                 </div>
-          
-        </Router>
+            </Router>
         </div>
     )
 }
 
 const mapStateToProps = (state) => {
     return {
-        userData: state.auth.data,
-        userMessages: state.auth.messages,
+        isLoading: state.loading.isLoading,
         isAuth: state.auth.isAuth,
     }
 }

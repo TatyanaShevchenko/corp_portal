@@ -46,8 +46,8 @@ export const profileReducer = (state = initialState, action) => {
 export const profile = {
     getProfile(userId) {
         return async (dispatch) => {
-            dispatch(switchLoadingAC(true))
             try {
+                dispatch(switchLoadingAC(true))
                 const profile = await profileAPI.getProfile(userId)
                 dispatch(setProfile(profile))
             } catch (error) {
@@ -60,22 +60,29 @@ export const profile = {
     getProfileStatus(userId) {
         return async (dispatch) => {
             try {
+                dispatch(switchLoadingAC(true))
                 const status = await profileAPI.getStatus(userId)
                 dispatch(setStatus(status))
             } catch (error) {
                 console.warn(error)
+            } finally {
+                dispatch(switchLoadingAC(false))
             }
         }
     },
     setMyStatus(status) {
         return async (dispatch) => {
             try {
+                dispatch(switchLoadingAC(true))
                 const res = await profileAPI.setMyStatus(status)
                 if (res.status === 200) {
                     dispatch(setStatus(status))
                 }
             } catch (error) {
                 console.warn(error)
+            }
+            finally {
+                dispatch(switchLoadingAC(false))
             }
         }
     },

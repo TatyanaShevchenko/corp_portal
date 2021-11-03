@@ -43,8 +43,8 @@ export const authReducer = (state = initialState, action) => {
 export const auth = {
     getAuthorisedInfo() {
         return async (dispatch) => {
-            dispatch(switchLoadingAC(true))
             try {
+                dispatch(switchLoadingAC(true))
                 const authorisedUserInfo = await authAPI.getAuthorisedData()
                 if (authorisedUserInfo.resultCode === 0) {
                     dispatch(setUserInfo(authorisedUserInfo))
@@ -62,8 +62,8 @@ export const auth = {
     },
     login(email,password,rememberMe, captcha){
         return async (dispatch) => {
-            dispatch(switchLoadingAC(true))
             try {
+                dispatch(switchLoadingAC(true))
                 const authorisedUserInfo = await authAPI.login(email,password,rememberMe, captcha)
                 if (authorisedUserInfo.resultCode === 0) {
                     dispatch(setUserInfo(authorisedUserInfo))
@@ -82,8 +82,8 @@ export const auth = {
     }, 
     logout (){
         return async (dispatch) => {
-            dispatch(switchLoadingAC(true))
             try {
+                dispatch(switchLoadingAC(true))
                 const res = await authAPI.logout()
                 if (res.resultCode === 0) {
                     dispatch(setUserInfo(res))
