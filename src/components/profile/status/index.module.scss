@@ -1,11 +1,8 @@
 @import '../../../styles/typo.scss';
-
-.status {
-    padding: 24px;
-    background-color: #fdfca2;
-}
+@import '../../../styles/colors.scss';
 
 .status__text {
     cursor: pointer;
     margin-bottom: 12px;
+    color: $text;
 }

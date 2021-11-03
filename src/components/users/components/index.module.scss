@@ -1,12 +1,14 @@
 @import '../../../styles/typo.scss';
+@import '../../../styles/colors.scss';
 
 .single__user {
+    color: $text;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 24px;
-    background-color: #ffb0f4;
-    border: 2px solid #ff79ed;
+    background-color: $beige;
+    border: 2px solid $orange;
     border-radius: 12px;
 
     &__photo {

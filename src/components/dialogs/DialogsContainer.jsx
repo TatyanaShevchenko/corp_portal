@@ -9,7 +9,6 @@ import { withAuth } from '../../utils/withAuth'
 const mapStateToProps = (state) => {
     return {
         data: state.dialogsPage,
-        isLoading: state.loading.isLoading,
     }
 }
 

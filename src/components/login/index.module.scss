@@ -4,7 +4,6 @@
     padding: 24px;
     box-sizing: border-box;
     height: 100%;
-    background-color: #ff9ff3;
 }
 .title {
     @include title;
@@ -27,10 +26,4 @@
 
 .btn {
     margin-top: 24px !important;
-}
-
-.error {
-    @include title;
-    margin-top: 8px;
-    color: red;
 }

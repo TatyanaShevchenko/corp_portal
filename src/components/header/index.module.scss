@@ -1,11 +1,12 @@
 @import '../../styles/typo.scss';
+@import '../../styles/colors.scss';
 
 .header {
     @include bold-title;
     grid-area: header;
-    color: white;
+    color: $light-beige;
     padding: 16px;
-    background-color: #341f97;
+    background-color: $blue;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,17 +15,17 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background-color: #feca57;
+    background-color: $orange;
 }
 
 .login a {
     @include bold-title;
-    color: white;
+    color: $light-beige;
     text-decoration: none;
     cursor: pointer;
 
     &:hover {
-        color: #feca57;
+        color: $orange;
     }
 }
 

@@ -1,12 +1,13 @@
 @import '../../styles/typo.scss';
+@import '../../styles/colors.scss';
 
 .navbar {
     grid-area: navbar;
-    color: #fff;
-    background-color: #2e86de;
+    color: $text;
+    background-color: $orange;
 }
 
 .navbar__link {
-    color: #fff;
+    color: $text;
     text-decoration: none;
 }

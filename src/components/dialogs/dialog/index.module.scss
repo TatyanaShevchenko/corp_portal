@@ -1,7 +1,10 @@
 @import '../../../styles/typo.scss';
+@import '../../../styles/colors.scss';
 
 .dialog {
+    @include bold-title;
     padding: 8px 0;
     margin: 2px;
     text-decoration: none;
+    color: $blue;
 }

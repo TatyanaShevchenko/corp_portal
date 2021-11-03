@@ -1,15 +1,11 @@
 @import '../../styles/typo.scss';
+@import '../../styles/colors.scss';
 
 .dialogs__wrapper {
     padding: 24px;
     box-sizing: border-box;
-    background-color: #00d2d3;
     height: 100%;
-    color: #222f3e;
-}
-
-.title {
-    @include title;
+    color: $text;
 }
 
 .grid {

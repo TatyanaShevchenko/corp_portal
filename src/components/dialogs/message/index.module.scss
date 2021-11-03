@@ -1,9 +1,10 @@
 @import '../../../styles/typo.scss';
+@import '../../../styles/colors.scss';
 
 .message {
     padding: 8px;
     margin: 2px;
-    border: 1px solid #8395a7;
+    border: 1px solid $orange;
     border-radius: 12px;
-    background-color: #deecfc;
+    background-color: $beige;
 }

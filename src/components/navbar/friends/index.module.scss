@@ -1,8 +1,9 @@
 @import '../../../styles/typo.scss';
+@import '../../../styles/colors.scss';
 
 .friends {
-    color: #fff;
-    background-color: #54a0ff;
+    color: $text;
+    background-color: $beige;
 }
 .title {
     padding: 12px;

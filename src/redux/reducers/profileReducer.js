@@ -62,7 +62,11 @@ export const profile = {
             try {
                 dispatch(switchLoadingAC(true))
                 const status = await profileAPI.getStatus(userId)
-                dispatch(setStatus(status))
+                if (status) {
+                    dispatch(setStatus(status))
+                } else {
+                    dispatch(setStatus(''))
+                }
             } catch (error) {
                 console.warn(error)
             } finally {
@@ -80,8 +84,7 @@ export const profile = {
                 }
             } catch (error) {
                 console.warn(error)
-            }
-            finally {
+            } finally {
                 dispatch(switchLoadingAC(false))
             }
         }

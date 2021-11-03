@@ -1,29 +1,28 @@
 @import '../../../styles/typo.scss';
+@import '../../../styles/colors.scss';
 
 .info {
-    padding: 24px;
-    background-color: #ff6b6b;
+    @include bold-title;
+
     display: flex;
     gap: 48px;
-}
-.title {
-    @include title;
-    margin-bottom: 12px;
+    margin-bottom: 24px;
+    color: $text;
 }
 
 .status,
 .job_status {
-    @include bold-title;
     margin-bottom: 24px;
 }
 
 .contacts__list__item {
+    @include usual-text;
     margin-bottom: 6px;
 }
 
 .photo {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    border: 2px solid #fc4c4c;
+    border: 2px solid $orange;
 }

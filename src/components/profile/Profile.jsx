@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import { profile } from '../../redux/reducers'
-import { Loader } from '../loader'
 import { Info } from './info'
 import { MyPosts } from './my-posts'
 
@@ -22,10 +21,8 @@ const Profile = ({
     posts,
     addPost,
     setStatus,
-    isLoading,
-    match
+    match,
 }) => {
-
     const { userId } = match.params
 
     useEffect(() => {
@@ -34,20 +31,14 @@ const Profile = ({
             await getProfileStatus(userId || userData.id)
         }
         fetchData()
-    }, [userData.id, userId])
+    }, [userId])
 
     return (
-        <>
-            {isLoading && <Loader />}
-            {!isLoading && (
-                <div className={styles.profile}>
-                    <p className={styles.title}>Profile</p>
-                    <Info profile={profile} />
-                    <Status data={status} setStatus={setStatus} />
-                    <MyPosts posts={posts} addPost={addPost} />
-                </div>
-            )}
-        </>
+        <div className={styles.profile}>
+            <Info profile={profile} />
+            <Status data={status} setStatus={setStatus} />
+            <MyPosts posts={posts} addPost={addPost} />
+        </div>
     )
 }
 
@@ -56,7 +47,6 @@ const mapStateToProps = (state) => {
         userData: state.auth.data,
         profile: state.profilePage.profile,
         status: state.profilePage.status,
-        isLoading: state.loading.isLoading,
         posts: state.profilePage.posts,
     }
 }
