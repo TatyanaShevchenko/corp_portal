@@ -18,6 +18,16 @@ let initialState = {
     disabledBtnId: [],
 }
 
+export const selectUsers = state => state.usersPage.users
+
+export const selectFriends = state => state.usersPage.friends
+
+export const selectPages = state => state.usersPage.pages
+
+export const selectCurrentPage = state =>  state.usersPage.currentPage
+
+export const selectDisabledBtn = state => state.usersPage.disabledBtnId
+
 const setBtnDisabled = (payload) => {
     return { type: SET_DISABLED_BUTTON, payload }
 }

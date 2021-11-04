@@ -2,7 +2,7 @@ import { Button } from '@material-ui/core'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { auth } from '../../redux/reducers/authReducer'
+import { auth , selectUserData} from '../../redux/reducers/authReducer'
 
 import styles from './index.module.scss'
 
@@ -35,7 +35,7 @@ export const Header = ({ userData, logout }) => {
 
 const mapStateToProps = (state) => {
     return {
-        userData: state.auth.data,
+        userData: selectUserData(state)
     }
 }
 

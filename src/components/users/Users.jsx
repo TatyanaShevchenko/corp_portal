@@ -5,7 +5,12 @@ import { User } from './components/User.jsx'
 import { Loader } from '../loader'
 import { PaginationContainer } from '../pagination/Pagination.jsx'
 
-import { users } from '../../redux/reducers/usersReducer'
+import {
+    users,
+    selectUsers,
+    selectDisabledBtn,
+} from '../../redux/reducers/usersReducer'
+import { selectIsLoading } from '../../redux/reducers/loadingReducer'
 
 import styles from './index.module.scss'
 
@@ -56,9 +61,9 @@ const Users = ({
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        disabledBtnId: state.usersPage.disabledBtnId,
-        isLoading: state.loading.isLoading,
+        users: selectUsers(state),
+        disabledBtnId: selectDisabledBtn(state),
+        isLoading: selectIsLoading(state),
     }
 }
 

@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 
 import { profile } from '../../redux/reducers'
+import { selectProfile, selectStatus, selectPosts } from '../../redux/reducers/profileReducer'
+import { selectUserData } from '../../redux/reducers/authReducer'
 import { Info } from './info'
 import { MyPosts } from './my-posts'
 
@@ -44,10 +46,10 @@ const Profile = ({
 
 const mapStateToProps = (state) => {
     return {
-        userData: state.auth.data,
-        profile: state.profilePage.profile,
-        status: state.profilePage.status,
-        posts: state.profilePage.posts,
+        userData: selectUserData(state),
+        profile: selectProfile(state),
+        status: selectStatus(state),
+        posts: selectPosts(state)
     }
 }
 

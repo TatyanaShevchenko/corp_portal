@@ -18,6 +18,8 @@ let initialState = {
 
 // selectors
 export const selectIsAuth = state => state.auth.isAuth
+
+export const selectUserData = state => state.auth.data
 // selectors
 
 const setAuth = (payload) => {

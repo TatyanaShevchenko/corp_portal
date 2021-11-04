@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import { HeaderContainer } from './components/header'
-import { NavbarContainer } from './components/navbar'
+import { Navbar } from './components/navbar'
 import { MainContent } from './components/main-content'
 import { Loader } from './components/loader'
 
@@ -26,7 +26,7 @@ function App({ isAuth, isLoading, getAuthorisedInfo }) {
         <div className={styles.app}>
             <Router>
                 <HeaderContainer />
-                <NavbarContainer />
+                <Navbar/>
                 <div className={styles.content}>
                 {isLoading && <Loader />}
                     <MainContent isAuth={isAuth} />

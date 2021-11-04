@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { Pagination } from '@material-ui/lab'
 
-import { users } from '../../redux/reducers/usersReducer'
+import { users, selectPages, selectCurrentPage } from '../../redux/reducers/usersReducer'
 
 export const PaginationComponent = ({
     pages,
@@ -33,8 +33,8 @@ export const PaginationComponent = ({
 }
 const mapStateToProps = (state) => {
     return {
-        pages: state.usersPage.pages,
-        currentPage: state.usersPage.currentPage,
+        pages: selectPages(state),
+        currentPage: selectCurrentPage(state)
     }
 }
 

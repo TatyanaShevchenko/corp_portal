@@ -11,7 +11,7 @@ export const MainContent = ({ isAuth }) => {
             <Route exact path="/dialogs">
                 <DialogsContainer isAuth={isAuth} />
             </Route>
-            <Route exact path="/users">
+            <Route path="/users">
                 <UsersContainer />
             </Route>
             <Route path="/profile/:userId?">

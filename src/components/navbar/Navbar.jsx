@@ -7,7 +7,7 @@ import MenuList from '@material-ui/core/MenuList'
 import styles from './index.module.scss'
 import { FriendsContainer } from './friends/Friends.jsx'
 
-export const Navbar = ({ data }) => {
+export const Navbar = () => {
     const [anchorEl, setAnchorEl] = useState(null)
     const [selectedIndex, setSelectedIndex] = useState(0)
 

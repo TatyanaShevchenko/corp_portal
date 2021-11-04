@@ -15,7 +15,13 @@ let initialState = {
     ],
 }
 
-export const setProfile = (payload) => {
+export const selectProfile = state => state.profilePage.profile
+
+export const selectStatus = state => state.profilePage.status
+
+export const selectPosts = state => state.profilePage.posts
+
+const setProfile = (payload) => {
     return { type: SET_PROFILE, payload }
 }
 

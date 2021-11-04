@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import { Friend } from './friend'
-import {users} from '../../../redux/reducers/usersReducer'
+import {users, selectFriends} from '../../../redux/reducers/usersReducer'
 
 import styles from './index.module.scss'
 import { useEffect } from 'react'
@@ -27,7 +27,7 @@ const Friends = ({ friends, getAllFriends }) => {
 
 const mapStateToProps = (state)=> {
     return {
-        friends: state.usersPage.friends
+        friends:selectFriends(state)
     }
 }
 
